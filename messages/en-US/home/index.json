@@ -1,0 +1,11 @@
+{
+  "meta": {
+    "title": { "display": "yiming's tools" },
+    "description": { "display": "Utility tools for my daily workflow." }
+  },
+
+  "hero-section": {
+    "title": { "display": "yiming's tools" },
+    "subtitle": { "display": "Utility tools for my daily workflow." }
+  }
+}

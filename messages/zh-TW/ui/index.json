@@ -1,0 +1,15 @@
+{
+  "theme": {
+    "light": { "display": "亮色模式" },
+    "dark": { "display": "暗色模式" },
+    "system": { "display": "系統預設" }
+  },
+
+  "navbar": {
+    "home": {
+      "description": {
+        "display": "我日常使用的小工具。"
+      }
+    }
+  }
+}
