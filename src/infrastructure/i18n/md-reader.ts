@@ -1,4 +1,4 @@
-import type { Messages, MessagesReader } from "intor";
+import type { Messages, MessagesReader } from "intor/server";
 import fs from "node:fs/promises";
 import { remark } from "remark";
 import remarkGfm from "remark-gfm";

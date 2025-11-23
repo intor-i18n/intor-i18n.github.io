@@ -3,13 +3,5 @@
     "light": { "display": "Light" },
     "dark": { "display": "Dark" },
     "system": { "display": "System" }
-  },
-
-  "navbar": {
-    "home": {
-      "description": {
-        "display": "Utility tools for my daily workflow."
-      }
-    }
   }
 }

@@ -28,18 +28,6 @@ const eslintConfig = defineConfig([
   ...importConfig,
   ...unusedImportsConfig,
 
-  // Custom Function Rules
-  { rules: { "func-style": ["warn", "expression"] } }, // Use arrow function (e.g., const fn = () => {})
-  {
-    files: [
-      "./src/app/**/api/**/*.ts", // Off for API routes
-      "./src/app/api/**/*.ts", // Off for API routes
-      "./src/server/interfaces/actions/**/*.ts", // Off for Server actions
-      "./src/**/*.tsx", // Off for JSX
-    ],
-    rules: { "func-style": "off" },
-  },
-
   // Prettier
   {
     files: ["src/**/*.{ts,tsx,js,jsx}"],

@@ -1,10 +1,11 @@
 import "@/interfaces/styles/globals.css";
 import type { Metadata } from "next";
-import { intor } from "intor";
+import { intor } from "intor/server";
 import { i18nConfig } from "@/infrastructure/i18n/i18n-config";
 import { LOCALE_PARAMS } from "@/infrastructure/i18n/locale";
 import { mdReader } from "@/infrastructure/i18n/md-reader";
 import { I18nProvider } from "@/infrastructure/i18n/providers/i18n-provider";
+import { ThemeProvider } from "@/interfaces/components/shadcn/theme/theme-provider";
 
 export async function generateStaticParams() {
   return LOCALE_PARAMS;
@@ -34,13 +35,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({
-  params,
-  children,
-}: Readonly<{
+type Props = Readonly<{
   params: Promise<{ locale: string }>;
   children: React.ReactNode;
-}>) {
+}>;
+
+export default async function RootLayout({ params, children }: Props) {
   const { locale } = await params;
   const value = await intor(
     i18nConfig,
@@ -49,10 +49,18 @@ export default async function RootLayout({
   );
 
   return (
-    <html lang="en">
-      <body className="antialiased">
-        {locale}
-        <I18nProvider value={value}>{children}</I18nProvider>
+    <html lang={value.initialLocale} suppressHydrationWarning>
+      <body className="flex justify-center antialiased">
+        <I18nProvider value={value}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </I18nProvider>
       </body>
     </html>
   );

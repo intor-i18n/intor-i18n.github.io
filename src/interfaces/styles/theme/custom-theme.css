@@ -1,0 +1,26 @@
+@theme inline {
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+}
+
+:root {
+  --info: oklch(0.488 0.243 264.376);
+  --info-foreground: oklch(0.97 0.014 254.604);
+  --success: oklch(0.648 0.2 131.684);
+  --success-foreground: oklch(0.986 0.031 120.757);
+  --warning: oklch(0.852 0.199 91.936);
+  --warning-foreground: oklch(0.421 0.095 57.708);
+}
+
+.dark {
+  --info: oklch(0.488 0.243 264.376);
+  --info-foreground: oklch(0.97 0.014 254.604);
+  --success: oklch(0.648 0.2 131.684);
+  --success-foreground: oklch(0.986 0.031 120.757);
+  --warning: oklch(0.795 0.184 86.047);
+  --warning-foreground: oklch(0.421 0.095 57.708);
+}
