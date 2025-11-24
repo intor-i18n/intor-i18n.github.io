@@ -1,14 +1,15 @@
 import "@/interfaces/styles/globals.css";
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import { intor } from "intor/server";
-import { i18nConfig } from "@/infrastructure/i18n/i18n-config";
-import { LOCALE_PARAMS } from "@/infrastructure/i18n/locale";
+import { intorConfig } from "@/infrastructure/i18n/intor-config";
+import { LOCALES_ARRAY } from "@/infrastructure/i18n/locale";
 import { mdReader } from "@/infrastructure/i18n/md-reader";
 import { I18nProvider } from "@/infrastructure/i18n/providers/i18n-provider";
 import { ThemeProvider } from "@/interfaces/components/shadcn/theme/theme-provider";
 
 export async function generateStaticParams() {
-  return LOCALE_PARAMS;
+  return LOCALES_ARRAY.map((locale) => ({ locale }));
 }
 
 // Metadata: icons
@@ -37,13 +38,13 @@ export const metadata: Metadata = {
 
 type Props = Readonly<{
   params: Promise<{ locale: string }>;
-  children: React.ReactNode;
+  children: ReactNode;
 }>;
 
 export default async function RootLayout({ params, children }: Props) {
   const { locale } = await params;
   const value = await intor(
-    i18nConfig,
+    intorConfig,
     { locale },
     { exts: [".json", ".md"], messagesReader: mdReader },
   );

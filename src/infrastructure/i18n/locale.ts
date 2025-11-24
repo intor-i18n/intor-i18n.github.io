@@ -18,11 +18,7 @@ export const LOCALE_DISPLAY = {
   [LOCALES_MAP.ZhTW]: "中文",
 };
 
-export const LOCALE_PARAMS = LOCALES_ARRAY.map((locale) => ({ locale }));
-
 //====== Types ======
 
 // Type: Union literal
 export type Locale = (typeof LOCALES_MAP)[keyof typeof LOCALES_MAP];
-
-export type LocaleParams = (typeof LOCALE_PARAMS)[number];

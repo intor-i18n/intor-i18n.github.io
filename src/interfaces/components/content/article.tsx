@@ -1,14 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { HeadingItem } from "@/applications/content/use-markdown-headings";
+import { SquareArrowOutUpRight } from "lucide-react";
 import { type ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { getText } from "@/applications/content/get-text";
 import { cn } from "@/applications/shadcn/lib/utils";
-import {
-  CodeProvider,
-  CodeHandler,
-} from "@/interfaces/components/content/code";
+import { CodeHandler } from "@/interfaces/components/content/code/code";
+import { CodeProvider } from "@/interfaces/components/content/code/code-context";
 
 export function Article({
   content,
@@ -58,8 +57,21 @@ export function Article({
             p: ({ node: _, ...props }) => <p {...props} />,
             ul: ({ node: _, ...props }) => <ul className="" {...props} />,
             ol: ({ node: _, ...props }) => <ol className="" {...props} />,
-            a: ({ node: _, ...props }) => {
-              return <a className="text-blue-600 hover:underline" {...props} />;
+            a: ({ node: _, href, children, ...props }) => {
+              const isExternal =
+                href?.startsWith("http") || href?.startsWith("https");
+              return (
+                <a
+                  className="text-info underline-offset-2 hover:underline"
+                  href={href}
+                  target={isExternal ? "_blank" : undefined}
+                  rel={isExternal ? "noopener noreferrer" : undefined}
+                  {...props}
+                >
+                  {children}{" "}
+                  <SquareArrowOutUpRight className="mb-px inline size-4" />
+                </a>
+              );
             },
             code: CodeHandler,
           }}

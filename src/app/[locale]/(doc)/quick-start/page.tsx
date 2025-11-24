@@ -1,7 +1,6 @@
-import type { LocaleParams } from "@/infrastructure/i18n/locale";
 import { getTranslator } from "intor/server";
 import { PAGES } from "@/config/pages";
-import { i18nConfig } from "@/infrastructure/i18n/i18n-config";
+import { intorConfig } from "@/infrastructure/i18n/intor-config";
 import { mdReader } from "@/infrastructure/i18n/md-reader";
 import { Content } from "@/interfaces/components/content/content";
 import { FrameworkCards } from "@/interfaces/components/pages/quick-start/framework-cards";
@@ -9,11 +8,11 @@ import { FrameworkCards } from "@/interfaces/components/pages/quick-start/framew
 export default async function QuickStartPage({
   params,
 }: {
-  params: Promise<LocaleParams>;
+  params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
   const { t } = await getTranslator({
-    config: i18nConfig,
+    config: intorConfig,
     locale,
     extraOptions: { exts: [".json", ".md"], messagesReader: mdReader },
   });

@@ -69,6 +69,9 @@ export function Content({
         <Article content={content} headings={headings}>
           {children}
         </Article>
+
+        {/* Bottom */}
+        <div className="h-96"></div>
       </div>
 
       {/* toc */}
