@@ -1,3 +1,4 @@
+import { FolderCode } from "lucide-react";
 import React from "react";
 import {
   Files,
@@ -16,6 +17,7 @@ type FileNode =
   | {
       type: "folder";
       gitStatus?: "untracked" | "modified" | "deleted";
+      isRoot?: boolean;
       children: Record<string, FileNode>;
     };
 
@@ -26,6 +28,8 @@ export function CodeFiles({ value }: { value: string }) {
 
   function renderTree(tree: FileTree): React.ReactNode[] {
     return Object.entries(tree).map(([key, node]) => {
+      const isRootFolder = node.type === "folder" && node.isRoot;
+
       if (node.type === "folder") {
         const childFolderKeys = Object.entries(node.children)
           .filter(([, child]) => child.type === "folder")
@@ -33,7 +37,13 @@ export function CodeFiles({ value }: { value: string }) {
 
         return (
           <FolderItem key={key} value={key}>
-            <FolderTrigger gitStatus={node.gitStatus}>{key}</FolderTrigger>
+            <FolderTrigger
+              gitStatus={node.gitStatus}
+              closeIcon={isRootFolder && <FolderCode className="size-4.5" />}
+              openIcon={isRootFolder && <FolderCode className="size-4.5" />}
+            >
+              {key}
+            </FolderTrigger>
             <FolderContent>
               {node.children && (
                 <SubFiles defaultOpen={childFolderKeys}>
@@ -55,7 +65,9 @@ export function CodeFiles({ value }: { value: string }) {
 
   return (
     <div className="bg-background relative mt-4 size-full h-fit rounded-2xl border">
-      <Files defaultOpen={["myapp", "messages"]}>{renderTree(fileTree)}</Files>
+      <Files defaultOpen={[Object.keys(fileTree)[0]]}>
+        {renderTree(fileTree)}
+      </Files>
     </div>
   );
 }

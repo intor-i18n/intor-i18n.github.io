@@ -1,33 +1,36 @@
 # Vite React
 
-在 Vite + React 的純前端環境中，**Intor** 會直接以靜態方式載入翻譯訊息（messages）。
+在 Vite + React 的純前端環境中，**Intor** 會以靜態方式載入翻譯訊息（messages），無需動態請求。
 
 ---
 
 ## 安裝
 
 若要開始 Vite + React 專案，請先確認環境已準備完成。  
-若尚未建立專案，可參考官方指引：[vite.dev](https://vite.dev/guide/#scaffolding-your-first-vite-project)
+若尚未建立專案，可參考官方指引：[Vite 官方文件](https://vite.dev/guide/#scaffolding-your-first-vite-project)
 
-專案建立完成後，即可安裝 Intor：
+> 以下範例使用 TypeScript，亦可使用 JavaScript。
 
-```bash groupId=1 ui=CodeTabs label=npm
+安裝 Intor：
+
+```bash ui=CodeTabs
+---tab npm---
 npm install intor
-```
 
-```bash groupId=1 ui=CodeTabs label=yarn
+---tab yarn---
 yarn add intor
 ```
 
 ---
 
-## 檔案與資料夾結構
+## 專案結構
 
-安裝完成後，即可開始設定檔案與資料夾結構，大致如下：
+以下提供最簡化的 **Intor** 配置範例，實際目錄與命名可依專案需求調整：
 
 ```json ui=Files
 {
   "myapp": {
+    "isRoot": "true",
     "type": "folder",
     "children": {
       "messages": {
@@ -53,7 +56,8 @@ yarn add intor
       "src": {
         "type": "folder",
         "children": {
-          "App.tsx": { "type": "file" },
+          "App.tsx": { "type": "file", "gitStatus": "modified" },
+          "main.tsx": { "type": "file", "gitStatus": "modified" },
           "intor-config.ts": { "type": "file", "gitStatus": "untracked" }
         }
       }
@@ -62,28 +66,28 @@ yarn add intor
 }
 ```
 
-### ♯1 語言檔案 Messages
+### ♯1 語言檔（Messages）
 
-我們在專案根目錄建立一個 `messages` 資料夾，在這裡放置不同語系的語言檔案。  
-一個語系一個資料夾，最簡單的配置方式是直接放 `index.json` 代表整個語系的語言檔案
-
-> 當然目錄位置跟名稱都是可以自行調整的，並且也支援更進階的namespaces嵌套配置，請查看此 [test](../)
+在專案中建立 `messages` 資料夾，並依語系建立子資料夾，每個語系提供一個 `index.json`：
 
 ```json ui=Files
 {
   "messages": {
     "type": "folder",
+    "gitStatus": "untracked",
     "children": {
       "en-US": {
         "type": "folder",
+        "gitStatus": "untracked",
         "children": {
-          "index.json": { "type": "file" }
+          "index.json": { "type": "file", "gitStatus": "untracked" }
         }
       },
       "zh-TW": {
         "type": "folder",
+        "gitStatus": "untracked",
         "children": {
-          "index.json": { "type": "file" }
+          "index.json": { "type": "file", "gitStatus": "untracked" }
         }
       }
     }
@@ -91,37 +95,37 @@ yarn add intor
 }
 ```
 
-- 語系檔案內容
-
-```json groupId=messages ui=CodeTabs label=messages/en-US/index.json
+```json ui=CodeTabs
+---tab messages/en-US/index.json---
 {
-  "greeting": "hello world"
+  "greeting": "Hello World"
 }
 ```
 
-```json groupId=messages ui=CodeTabs label=messages/zh-TW/index.json
+```json ui=CodeTabs
+---tab messages/zh-TW/index.json---
 {
   "greeting": "你好，世界"
 }
 ```
 
-### ♯2 Intor 設定檔案
+> 以上檔案位置與命名可依需求調整。若有進階需求（如 namespace 結構），Intor 提供更完整的設定方式。
 
-我們需要設定一個 `intorConfig` 在整個系統共用，他是一個純靜態的物件
+### ♯2 Intor 設定（Configuration）
 
-> 當然此設定物件可以隨您的喜好去命名，也可以照您的喜好去放置位置，例如: src/i18n/config.ts
+建立全域設定檔 `intorConfig`，靜態引入 messages：
 
 ```json ui=Files
 {
   "intor-config.ts": {
-    "type": "file"
+    "type": "file",
+    "gitStatus": "untracked"
   }
 }
 ```
 
-- 最極簡 intorConfig 內容
-
-```ts groupId=config ui=CodeTabs label=src/intor-config.ts
+```ts ui=CodeTabs
+---tab src/intor-config.ts---
 import { defineIntorConfig } from "intor/config";
 import enUS from "../messages/en-US/index.json";
 import zhTW from "../messages/zh-TW/index.json";
@@ -135,18 +139,28 @@ export const intorConfig = defineIntorConfig({
 });
 ```
 
-### ♯3 設置 Context
+> 設定物件可依個人喜好命名與存放位置，例如 src/i18n/config.ts。
 
-我們需要使用 `IntorProvider` 將 `<App />` 包裹起來 以方便提供context
+### ♯3 初始化 Context
 
-> 初始化的value必須傳入intor config 以及自訂的 initial locale
+在 React 應用中，需要用 `IntorProvider` 包裹 `<App />`，以提供翻譯 Context。  
+建議使用 **Intor** 內建的 `getInitialLocale()`，可自動偵測使用者的 `cookie` 與 `瀏覽器語系`：
 
-```ts groupId=context ui=CodeTabs label=src/main.tsx
+```json ui=Files
+{
+  "main.tsx": {
+    "type": "file",
+    "gitStatus": "modified"
+  }
+}
+```
+
+```ts ui=CodeTabs
+---tab src/main.tsx---
 // ...
 import { IntorProvider, getInitialLocale } from "intor/react";
 import { intorConfig } from "./i18n-config.ts";
 
-// util for get initial locale, auto detect from cookie & browser
 const initialLocale = getInitialLocale(intorConfig);
 
 createRoot(document.getElementById("root")!).render(
@@ -156,5 +170,124 @@ createRoot(document.getElementById("root")!).render(
     </IntorProvider>
   </StrictMode>,
 );
+```
 
+> 提示：您也可以依專案需求自行設計取得初始語系（initialLocale）的方式。
+
+🎉 至此，設定完成，可以開始在應用中使用 Intor。
+
+---
+
+## 使用範例
+
+```json ui=Files
+{
+  "App.tsx": {
+    "type": "file",
+    "gitStatus": "modified"
+  }
+}
+```
+
+```tsx ui=CodeTabs
+---tab src/App.tsx---
+// ...
+import { useTranslator } from "intor/react";
+
+function App() {
+  const { t, setLocale } = useTranslator();
+
+  return (
+    <>
+      <h1>{t("greeting")}</h1>
+
+      <div style={{ display: "flex", gap: "12px" }}>
+        <button onClick={() => setLocale("en-US")}>English</button>
+        <button onClick={() => setLocale("zh-TW")}>繁體中文</button>
+      </div>
+    </>
+  );
+}
+
+export default App;
+```
+
+### 依語系動態匯入（Locale-Based Dynamic Import）
+
+如果您希望依照使用者語系動態載入對應的 messages，可以採用 Dynamic Import 的方式。
+
+在此範例中，我們建立了一個專門的組件 `I18nProvider` 來包裹 `<App />`，負責：
+
+- 初始化時載入當前語系的 messages
+- 支援在切換語系時動態更新 messages，而不需要重新載入整個頁面
+
+同時，需要在 `main.tsx` 中使用這個 `I18nProvider`，以便提供全局語系 Context 給應用程式。
+
+```json ui=Files
+{
+  "src": {
+    "type": "folder",
+    "children": {
+      "i18n-provider.tsx": {
+        "type": "file",
+        "gitStatus": "untracked"
+      },
+      "main.tsx": {
+        "type": "file",
+        "gitStatus": "modified"
+      }
+    }
+  }
+}
+```
+
+```tsx ui=CodeTabs
+---tab src/main.tsx---
+// ...
+import { I18nProvider } from "./i18n-provider.tsx";
+
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <I18nProvider />
+  </StrictMode>,
+);
+```
+
+```tsx ui=CodeTabs
+---tab src/i18n-provider.tsx---
+// ...
+import App from "./App.tsx";
+import { mergeMessages, type LocaleMessages } from "intor";
+import { getInitialLocale, IntorProvider } from "intor/react";
+import { intorConfig } from "./i18n-config.ts";
+
+const importMessages = async (locale: string) =>
+  await import(`../messages/${locale}/index.json`).then((m) => m.default);
+
+const initialLocale = getInitialLocale(intorConfig);
+const initialMessages = {
+  [initialLocale]: await importMessages(initialLocale),
+};
+
+export function I18nProvider() {
+  const [messages, setMessages] = useState<LocaleMessages>(
+    mergeMessages(intorConfig.messages, initialMessages),
+  );
+
+  return (
+    <IntorProvider
+      value={{
+        config: intorConfig,
+        initialLocale,
+        messages: mergeMessages(intorConfig.messages, messages),
+        onLocaleChange: async (newLocale: string) => {
+          const newMessages = { [newLocale]: await importMessages(newLocale) };
+          setMessages(mergeMessages(intorConfig.messages, newMessages));
+        },
+      }}
+    >
+      <App />
+    </IntorProvider>
+  );
+}
 ```

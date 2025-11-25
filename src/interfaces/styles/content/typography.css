@@ -46,7 +46,7 @@
   .content h3:not([data-slot="folder-header"]) {
     font-size: var(--content-h3-size);
     line-height: 1.4;
-    margin-top: 2em;
+    margin-top: 2.5em;
     font-weight: 600;
     scroll-margin-top: 4.3rem;
   }
@@ -59,7 +59,7 @@
 
   .content p {
     font-size: 16px;
-    line-height: 1.6;
+    line-height: 1.7;
     margin-top: 1em;
   }
 }

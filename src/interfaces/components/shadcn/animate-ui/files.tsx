@@ -50,12 +50,14 @@ function FolderItem(props: FolderItemProps) {
 
 type FolderTriggerProps = FileLabelPrimitiveProps & {
   gitStatus?: GitStatus;
-};
+} & { closeIcon?: React.ReactNode; openIcon?: React.ReactNode };
 
 function FolderTrigger({
   children,
   className,
   gitStatus,
+  closeIcon = <FolderIcon className="size-4.5" />,
+  openIcon = <FolderOpenIcon className="size-4.5" />,
   ...props
 }: FolderTriggerProps) {
   return (
@@ -71,10 +73,7 @@ function FolderTrigger({
                 gitStatus === "deleted" && "text-red-400",
               )}
             >
-              <FolderIconPrimitive
-                closeIcon={<FolderIcon className="size-4.5" />}
-                openIcon={<FolderOpenIcon className="size-4.5" />}
-              />
+              <FolderIconPrimitive closeIcon={closeIcon} openIcon={openIcon} />
               <FileLabelPrimitive
                 className={cn("text-sm", className)}
                 {...props}
