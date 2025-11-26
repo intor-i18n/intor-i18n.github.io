@@ -23,7 +23,7 @@ export default async function NextJsPage({
           { i18nKey: PAGES.quickStart.i18nKey, path: PAGES.quickStart.path },
           { i18nKey: PAGES.nextJs.i18nKey },
         ]}
-        content={t("articles.quick-start.content")}
+        content={t("articles.next-js.content")}
       ></Content>
     </>
   );

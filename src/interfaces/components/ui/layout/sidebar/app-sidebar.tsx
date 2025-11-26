@@ -1,7 +1,7 @@
 "use client";
 
 import { Link, usePathname, useTranslator } from "intor/next";
-import { Rocket, Tag } from "lucide-react";
+import { BookCopy, Rocket, Settings, Tag, Type } from "lucide-react";
 import * as React from "react";
 import { cn } from "@/applications/shadcn/lib/utils";
 import { PAGES } from "@/config/pages";
@@ -36,6 +36,24 @@ const data = {
           path: PAGES.viteReact.path,
         },
       ],
+    },
+    {
+      icon: <Settings />,
+      i18nKey: "設定物件",
+      path: "PAGES.quickStart.path",
+      items: [],
+    },
+    {
+      icon: <BookCopy />,
+      i18nKey: "語言檔",
+      path: "PAGES.quickStart.path",
+      items: [],
+    },
+    {
+      icon: <Type />,
+      i18nKey: "型別生成 & IntelliSense",
+      path: "PAGES.quickStart.path",
+      items: [],
     },
   ],
 };

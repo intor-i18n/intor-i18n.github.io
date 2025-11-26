@@ -14,16 +14,24 @@
 安裝 Intor：
 
 ```bash ui=CodeTabs
----label npm---
+---
+title: npm
+---
 npm install intor
 
----label yarn---
+---
+title: yarn
+---
 yarn add intor
 
----label pnpm---
+---
+title: pnpm
+---
 pnpm add intor
 
----label bun---
+---
+title: bun
+---
 bun add intor
 ```
 
@@ -102,14 +110,18 @@ bun add intor
 ```
 
 ```json ui=CodeTabs
----label messages/en-US/index.json---
+---
+title: messages/en-US/index.json
+---
 {
   "greeting": "Hello World"
 }
 ```
 
 ```json ui=CodeTabs
----label messages/zh-TW/index.json---
+---
+title: messages/zh-TW/index.json
+---
 {
   "greeting": "你好，世界"
 }
@@ -131,7 +143,9 @@ bun add intor
 ```
 
 ```ts ui=CodeTabs
----label src/intor-config.ts---
+---
+title: src/intor-config.ts
+---
 import { defineIntorConfig } from "intor/config";
 import enUS from "../messages/en-US/index.json";
 import zhTW from "../messages/zh-TW/index.json";
@@ -161,8 +175,10 @@ export const intorConfig = defineIntorConfig({
 }
 ```
 
-```ts ui=CodeTabs
----label src/main.tsx---
+```tsx ui=CodeTabs
+---
+title: src/main.tsx
+---
 // ...
 import { IntorProvider, getInitialLocale } from "intor/react";
 import { intorConfig } from "./i18n-config.ts";
@@ -202,7 +218,9 @@ createRoot(document.getElementById("root")!).render(
 ```
 
 ```tsx ui=CodeTabs
----label src/App.tsx---
+---
+title: src/App.tsx
+---
 // ...
 import { useTranslator } from "intor/react";
 
@@ -238,7 +256,9 @@ export default App;
 詳見前面的 [♯2 Intor 設定](#2-intor-設定configuration)。
 
 ```ts ui=CodeTabs
----label src/intor-config.ts---
+---
+title: src/intor-config.ts
+---
 import enUS from "../messages/en-US/index.json";
 ```
 
@@ -272,7 +292,9 @@ import enUS from "../messages/en-US/index.json";
 ```
 
 ```tsx ui=CodeTabs
----label src/main.tsx---
+---
+title: src/main.tsx
+---
 // ...
 import { I18nProvider } from "./i18n-provider.tsx";
 
@@ -284,7 +306,9 @@ createRoot(document.getElementById("root")!).render(
 ```
 
 ```tsx ui=CodeTabs
----label src/i18n-provider.tsx---
+---
+title: src/i18n-provider.tsx
+---
 // ...
 import App from "./App.tsx";
 import { mergeMessages, type LocaleMessages } from "intor";
@@ -326,14 +350,12 @@ export function I18nProvider() {
 
 ---
 
-## 後續章節
+## 下一步行動
 
 ```tsx ui=Card
----title 生成型別---
-生成型別就是,...........
-
----title 生成型別---
-生成型別就是,...........
-
-
+---
+title: 型別生成與 IntelliSense
+href: quick-start
+---
+透過 @intor/cli 自動生成型別，讓您的開發過程具備完整的 IntelliSense 體驗與安全的型別支援。
 ```

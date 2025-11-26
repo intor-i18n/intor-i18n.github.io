@@ -1,5 +1,6 @@
 import { FolderCode } from "lucide-react";
 import React from "react";
+import { cn } from "@/applications/shadcn/lib/utils";
 import {
   Files,
   FolderItem,
@@ -23,8 +24,14 @@ type FileNode =
 
 type FileTree = Record<string, FileNode>;
 
-export function CodeFiles({ value }: { value: string }) {
-  const fileTree: FileTree = JSON.parse(value);
+export function CodeFiles({
+  content,
+  className,
+}: {
+  content: string;
+  className?: string;
+}) {
+  const fileTree: FileTree = JSON.parse(content);
 
   function renderTree(tree: FileTree): React.ReactNode[] {
     return Object.entries(tree).map(([key, node]) => {
@@ -64,7 +71,12 @@ export function CodeFiles({ value }: { value: string }) {
   }
 
   return (
-    <div className="bg-background relative mt-6 size-full h-fit rounded-2xl border">
+    <div
+      className={cn(
+        "bg-background relative size-full h-fit rounded-2xl border",
+        className,
+      )}
+    >
       <Files defaultOpen={[Object.keys(fileTree)[0]]}>
         {renderTree(fileTree)}
       </Files>

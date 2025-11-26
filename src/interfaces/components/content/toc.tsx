@@ -73,14 +73,14 @@ export function Toc({ headings }: { headings: HeadingItem[] }) {
   }>({ top: 0, left: 0, height: 0 });
   useEffect(() => {
     if (!activeId || !containerRef.current) return;
-    const li = containerRef.current!.querySelector<HTMLLIElement>(
+    const li = containerRef.current.querySelector<HTMLLIElement>(
       `li[data-id="${activeId}"]`,
     );
     queueMicrotask(() =>
       setLineStyle({
-        top: !li ? 0 : li.offsetTop,
+        top: !li ? 0 : li.offsetTop + 6,
         left: !li ? 0 : li.dataset.level === "3" ? 12 : 0,
-        height: !li ? 0 : li.offsetHeight,
+        height: !li ? 0 : 24,
       }),
     );
   }, [activeId, headings]);
@@ -109,12 +109,12 @@ export function Toc({ headings }: { headings: HeadingItem[] }) {
               data-id={id}
               data-level={level}
               style={{ paddingLeft: level === 2 ? 4 : 16 }}
-              className="mt-4 w-full"
+              className="w-full"
             >
               <Link
                 href={`#${id}`}
                 className={cn(
-                  "block w-full",
+                  "block size-full py-2",
                   "duration-150",
                   isActive
                     ? "text-secondary-foreground font-medium"

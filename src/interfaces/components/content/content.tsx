@@ -40,7 +40,7 @@ export function Content({
       >
         {/* breadcrumbs */}
         <Breadcrumb
-          className="px-3 pt-6"
+          className="px-6 pt-6"
           style={{ height: BREADCRUMBS_HEIGHT }}
         >
           <BreadcrumbList>
@@ -71,7 +71,7 @@ export function Content({
         </Article>
 
         {/* Bottom */}
-        <div className="h-96"></div>
+        <div className="h-64"></div>
       </div>
 
       {/* toc */}
