@@ -8,16 +8,21 @@ type Props = Readonly<{ children: React.ReactNode }>;
 
 export default function DocLayout({ children }: Props) {
   return (
-    <SidebarProvider style={{ maxWidth: LAYOUT_MAX_WIDTH }}>
+    <SidebarProvider>
       <Navbar />
 
-      <div className="flex w-full">
+      <div
+        className="mx-auto flex w-full"
+        style={{ maxWidth: LAYOUT_MAX_WIDTH }}
+      >
         {/* Sidebar */}
-        <AppSidebar />
+        <AppSidebar className="w-[16rem]" />
 
         {/* Main */}
-        <div className="flex-1">{children}</div>
+        <div className="w-full md:w-[calc(100%-16rem)]">{children}</div>
       </div>
+
+      <footer className="mt-12 h-96 border-t bg-linear-0 from-slate-100/10 to-slate-300/10"></footer>
     </SidebarProvider>
   );
 }

@@ -8,7 +8,7 @@
 }
 
 :root {
-  --info: oklch(0.488 0.243 264.376);
+  --info: oklch(0.717 0.1648 250.794);
   --info-foreground: oklch(0.97 0.014 254.604);
   --success: oklch(0.648 0.2 131.684);
   --success-foreground: oklch(0.986 0.031 120.757);
@@ -17,7 +17,7 @@
 }
 
 .dark {
-  --info: oklch(0.488 0.243 264.376);
+  --info: oklch(0.717 0.1648 250.794);
   --info-foreground: oklch(0.97 0.014 254.604);
   --success: oklch(0.648 0.2 131.684);
   --success-foreground: oklch(0.986 0.031 120.757);

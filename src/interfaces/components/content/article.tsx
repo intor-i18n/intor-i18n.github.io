@@ -69,7 +69,9 @@ export function Article({
                   {...props}
                 >
                   {children}{" "}
-                  <SquareArrowOutUpRight className="mb-px inline size-4" />
+                  {isExternal && (
+                    <SquareArrowOutUpRight className="mb-px inline size-4" />
+                  )}
                 </a>
               );
             },

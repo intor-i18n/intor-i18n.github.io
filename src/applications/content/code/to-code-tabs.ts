@@ -5,9 +5,9 @@ export interface CodeTab {
   code: ReactNode;
 }
 
-export function toCodeTabsCodes(content: string): Record<string, string> {
+export function toCodeTabs(content: string): Record<string, string> {
   const tabs: CodeTab[] = [];
-  const regex = /^---tab (.+?)---$/gm;
+  const regex = /^---label (.+?)---$/gm;
 
   let match: RegExpExecArray | null;
   let lastIndex = 0;

@@ -1,7 +1,7 @@
 "use client";
 
 import { Link, usePathname, useTranslator } from "intor/next";
-import { Rocket } from "lucide-react";
+import { Rocket, Tag } from "lucide-react";
 import * as React from "react";
 import { cn } from "@/applications/shadcn/lib/utils";
 import { PAGES } from "@/config/pages";
@@ -58,12 +58,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               className={cn(isCollapsed && "hidden")}
             >
               <Link href="#">
-                {/* <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                  <GalleryVerticalEnd className="size-4" />
-                </div> */}
+                <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
+                  <Tag className="size-4" />
+                </div>
                 <div className="flex flex-col gap-0.5 leading-none">
                   <span className="font-medium">Documentation</span>
-                  <span className="">v1.0.0</span>
+                  <span className="">v2.0.0</span>
                 </div>
               </Link>
             </SidebarMenuButton>
@@ -80,7 +80,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   asChild
                   isActive={unprefixedPathname.startsWith(item.path)}
                 >
-                  <Link href={item.path} className="font-medium">
+                  <Link
+                    href={item.path}
+                    className={cn(
+                      "font-medium",
+                      unprefixedPathname === item.path && "pointer-events-none",
+                    )}
+                  >
                     {item.icon}
                     {t(item.i18nKey)}
                   </Link>

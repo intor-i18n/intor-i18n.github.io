@@ -51,7 +51,11 @@ export default async function RootLayout({ params, children }: Props) {
 
   return (
     <html lang={value.initialLocale} suppressHydrationWarning>
-      <body className="flex justify-center antialiased">
+      <body
+        id="web-root"
+        className="flex justify-center antialiased"
+        suppressHydrationWarning
+      >
         <I18nProvider value={value}>
           <ThemeProvider
             attribute="class"

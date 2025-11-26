@@ -32,7 +32,6 @@
     margin-top: 1em;
     margin-bottom: 0.5em;
     font-weight: 600;
-    scroll-margin-top: 4.3rem;
   }
 
   .content h2 {
@@ -40,15 +39,15 @@
     line-height: 1.4;
     margin-top: 1.5em;
     font-weight: 600;
-    scroll-margin-top: 4.3rem;
+    scroll-margin-top: 5.6rem;
   }
 
   .content h3:not([data-slot="folder-header"]) {
     font-size: var(--content-h3-size);
     line-height: 1.4;
-    margin-top: 2.5em;
+    margin-top: 2.4em;
     font-weight: 600;
-    scroll-margin-top: 4.3rem;
+    scroll-margin-top: 4.5rem;
   }
 
   .content h4 {

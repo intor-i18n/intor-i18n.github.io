@@ -17,6 +17,10 @@
   -webkit-user-drag: none;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   touch-action: none;
 }

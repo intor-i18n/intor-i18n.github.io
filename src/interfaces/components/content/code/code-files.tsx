@@ -64,7 +64,7 @@ export function CodeFiles({ value }: { value: string }) {
   }
 
   return (
-    <div className="bg-background relative mt-4 size-full h-fit rounded-2xl border">
+    <div className="bg-background relative mt-6 size-full h-fit rounded-2xl border">
       <Files defaultOpen={[Object.keys(fileTree)[0]]}>
         {renderTree(fileTree)}
       </Files>

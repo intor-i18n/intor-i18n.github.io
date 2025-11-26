@@ -1,17 +1,17 @@
 # Vite React
 
-在 Vite + React 的專案中，Intor 能以輕量的方式整合多語系，不論是預先載入翻譯內容，或依需求分拆語系資源，都能保持快速與彈性。
+In a Vite + React project, Intor provides a lightweight way to integrate multi-language support. It allows preloading translation content or dynamically splitting language resources while keeping performance and flexibility.
 
-> 以下範例使用 TypeScript，亦可使用 JavaScript。
+> The following examples use TypeScript, but JavaScript can also be used.
 
 ---
 
-## 安裝
+## Installation
 
-若要開始 Vite + React 專案，請先確認環境已準備完成。  
-若尚未建立專案，可參考官方指引：[Vite 官方文件](https://vite.dev/guide/#scaffolding-your-first-vite-project)
+Before starting a Vite + React project, make sure your environment is ready.  
+If you haven’t created a project yet, refer to the official guide: [Vite Documentation](https://vite.dev/guide/#scaffolding-your-first-vite-project)
 
-安裝 Intor：
+Install Intor:
 
 ```bash ui=CodeTabs
 ---label npm---
@@ -29,9 +29,9 @@ bun add intor
 
 ---
 
-## 專案結構
+## Project Structure
 
-以下提供最簡化的 **Intor** 配置範例，實際目錄與命名可依專案需求調整：
+Here’s a minimal **Intor** setup example. You can adjust folder names and structure according to your project needs:
 
 ```json ui=Files
 {
@@ -72,9 +72,10 @@ bun add intor
 }
 ```
 
-### ♯1 語言檔（Messages）
+### ♯1 Language Files (Messages)
 
-在專案中建立 `messages` 資料夾，並依語系建立子資料夾，每個語系提供一個 `index.json`：
+Create a `messages` folder in your project, and create a subfolder for each locale.  
+Each locale contains an `index.json` file:
 
 ```json ui=Files
 {
@@ -115,11 +116,11 @@ bun add intor
 }
 ```
 
-> 提示：您完全可以使用更簡易的攤平架構： `mesages/en-US.json` / `mesages/zh-TW.json` ，取決於您的喜好。
+> Tip: You can also use a simpler flat structure: `messages/en-US.json` / `messages/zh-TW.json`, depending on your preference.
 
-### ♯2 Intor 設定（Configuration）
+### ♯2 Intor Configuration
 
-建立全域設定檔 `intorConfig`，靜態匯入 `messages`：
+Create a global configuration file `intorConfig` and statically import `messages`:
 
 ```json ui=Files
 {
@@ -145,12 +146,12 @@ export const intorConfig = defineIntorConfig({
 });
 ```
 
-> 設定物件可依個人喜好命名與存放位置，例如 src/i18n/config.ts。
+> You can adjust the file path or naming according to your preferences, e.g. src/i18n/config.ts.
 
-### ♯3 初始化 Context
+### ♯3 Initialize Context
 
-在 React 應用中，需要用 `IntorProvider` 包裹 `<App />`，以提供翻譯 Context。  
-建議使用 **Intor** 內建的 `getInitialLocale()`，可自動偵測使用者的 `cookie` 與 `瀏覽器語系`：
+Wrap `<App />` with `IntorProvider` to provide translation context.  
+It is recommended to use Intor’s built-in `getInitialLocale()` to automatically detect the user’s `cookie` or `browser language`:
 
 ```json ui=Files
 {
@@ -178,19 +179,19 @@ createRoot(document.getElementById("root")!).render(
 );
 ```
 
-> 提示：您也可以依專案需求自行設計取得初始語系（initialLocale）的方式。
+> Tip: You can also implement your own logic to determine initialLocale depending on your project requirements.
 
-🎉 至此，設定完成，可以開始在應用中使用 Intor。
+🎉 At this point, Intor is ready, and you can start using it in your application.
 
 ---
 
-## 使用範例
+## Usage Example
 
-下面示範的是一個最精簡的 `<App />`，讓您能迅速掌握 **Intor** 的核心使用方式。  
-透過 `useTranslator` 這個 hook，我們可以取得 t 與 setLocale：
+Here’s a minimal` <App />` example to quickly demonstrate the core usage of **Intor**.  
+With the `useTranslator` hook, you can access:
 
-- `t` (translate) 用來翻譯文字
-- `setLocale` 用來切換當前語系。
+- `t` (translate) to get translated text
+- `setLocale` to switch the current locale
 
 ```json ui=Files
 {
@@ -224,34 +225,34 @@ function App() {
 export default App;
 ```
 
-接下來，我們再依照不同的專案需求，介紹兩種 `messages` 的載入方式。
+Next, we will explain the two ways of loading `messages` based on project requirements.
 
 ---
 
-## 語言檔匯入方式
+## Message Loading Methods
 
-### 靜態匯入
+### Static Import
 
-> 靜態匯入是最簡單直接的方式。
+> Static import is the simplest and most straightforward approach.
 
-上面的步驟已經完成了靜態匯入的配置：直接把各語系的 `messages` 載入專案中，就能立即使用。  
-詳見前面的 [♯2 Intor 設定](#2-intor-設定configuration)。
+As demonstrated in the previous steps, we have already completed the static import of all `messages` into the project configuration.  
+Refer to #2 Intor Configuration [♯2 Intor Configuration](#2-intor-configuration).
 
 ```ts ui=CodeTabs
 ---label src/intor-config.ts---
 import enUS from "../messages/en-US/index.json";
 ```
 
-### 依語系動態匯入
+### Dynamic Import by Locale
 
-> 如果專案中的 messages 很大，或希望減少初次建置的 bundle 體積，可以考慮使用 Dynamic Import，依使用者語系動態載入對應的 messages
+> If your messages are large or you want to reduce the initial bundle size, consider using dynamic import to load messages by locale.
 
-在此範例中，我們建立一個專門的組件 `I18nProvider` 來包裹 `<App />`，負責：
+We can create a dedicated `I18nProvider` component to wrap `<App />`, which:
 
-- 初始化時載入當前語系的 messages
-- 支援在切換語系時動態更新 messages，而不需要重新載入整個頁面
+- Loads messages for the current locale on initialization
+- Updates messages dynamically when switching locales without reloading the page
 
-同時，需要在 `main.tsx` 中使用這個 `I18nProvider`，以便提供全局語系 Context 給應用程式。
+You need to use this `I18nProvider` in `main.tsx` to provide a global locale context to your application.
 
 ```json ui=Files
 {
@@ -291,17 +292,17 @@ import { mergeMessages, type LocaleMessages } from "intor";
 import { getInitialLocale, IntorProvider } from "intor/react";
 import { intorConfig } from "./i18n-config.ts";
 
-// 動態載入指定語系的 messages
+// Dynamically load messages for the specified locale
 const importMessages = async (locale: string) => ({
   [locale]: (await import(`../messages/${locale}/index.json`)).default,
 });
 
-// 初始化語系並載入對應的 messages
+// Initialize locale and load corresponding messages
 const initialLocale = getInitialLocale(intorConfig);
 const initialMessages = await importMessages(initialLocale);
 
 export function I18nProvider() {
-  // 儲存並管理目前的 messages
+  // Store and manage the current messages
   const [messages, setMessages] = useState<LocaleMessages>(
     mergeMessages(intorConfig.messages, initialMessages),
   );
@@ -326,14 +327,6 @@ export function I18nProvider() {
 
 ---
 
-## 後續章節
+## Next Steps
 
-```tsx ui=Card
----title 生成型別---
-生成型別就是,...........
-
----title 生成型別---
-生成型別就是,...........
-
-
-```
+1. Type generation

@@ -97,37 +97,50 @@ function AccordionContent({
 }: AccordionContentProps) {
   const { isOpen } = useAccordionItem();
 
+  const [initial, setInitial] = React.useState({
+    height: "auto",
+    opacity: 1,
+    "--mask-stop": "100%",
+    y: 0,
+  });
+  React.useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    setInitial({ height: 0, opacity: 0, "--mask-stop": "0%", y: 20 } as any);
+  }, []);
+
   return (
     <AnimatePresence>
       {keepRendered ? (
-        <AccordionPrimitive.Content asChild forceMount>
-          <motion.div
-            key="accordion-content"
-            data-slot="accordion-content"
-            initial={{ height: 0, opacity: 0, "--mask-stop": "0%", y: 20 }}
-            animate={
-              isOpen
-                ? { height: "auto", opacity: 1, "--mask-stop": "100%", y: 0 }
-                : { height: 0, opacity: 0, "--mask-stop": "0%", y: 20 }
-            }
-            transition={transition}
-            style={{
-              maskImage:
-                "linear-gradient(black var(--mask-stop), transparent var(--mask-stop))",
-              WebkitMaskImage:
-                "linear-gradient(black var(--mask-stop), transparent var(--mask-stop))",
-              overflow: "hidden",
-            }}
-            {...props}
-          />
-        </AccordionPrimitive.Content>
+        // <AccordionPrimitive.Content asChild forceMount>
+        //   <motion.div
+        //     key="accordion-content"
+        //     data-slot="accordion-content"
+        //     initial={{ height: 0, opacity: 0, "--mask-stop": "0%", y: 20 }}
+        //     animate={
+        //       isOpen
+        //         ? { height: "auto", opacity: 1, "--mask-stop": "100%", y: 0 }
+        //         : { height: 0, opacity: 0, "--mask-stop": "0%", y: 20 }
+        //     }
+        //     transition={transition}
+        //     style={{
+        //       maskImage:
+        //         "linear-gradient(black var(--mask-stop), transparent var(--mask-stop))",
+        //       WebkitMaskImage:
+        //         "linear-gradient(black var(--mask-stop), transparent var(--mask-stop))",
+        //       overflow: "hidden",
+        //     }}
+        //     {...props}
+        //   />
+        // </AccordionPrimitive.Content>
+        <></>
       ) : (
         isOpen && (
           <AccordionPrimitive.Content asChild forceMount>
             <motion.div
               key="accordion-content"
               data-slot="accordion-content"
-              initial={{ height: 0, opacity: 0, "--mask-stop": "0%", y: 20 }}
+              // initial={{ height: 0, opacity: 0, "--mask-stop": "0%", y: 20 }}
+              initial={initial}
               animate={{
                 height: "auto",
                 opacity: 1,

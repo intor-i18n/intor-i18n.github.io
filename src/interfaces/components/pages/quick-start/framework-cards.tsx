@@ -4,22 +4,22 @@ import { Link } from "intor/next";
 import { PAGES } from "@/config/pages";
 import Nextjs from "@/interfaces/components/icons/nextjs";
 import Vite from "@/interfaces/components/icons/vite";
-import { Card } from "@/interfaces/components/shadcn/card";
+import { SpotlightCard } from "@/interfaces/components/shadcn/spotlight-card/spotlight-card";
 
 export function FrameworkCards() {
   return (
-    <div className="mt-6 grid grid-cols-4 gap-6">
+    <div className="mt-6 grid grid-cols-2 gap-6">
       <Link href={PAGES.nextJs.path}>
-        <Card className="items-center gap-3">
+        <SpotlightCard className="items-center gap-3">
           <Nextjs />
           Next.js
-        </Card>
+        </SpotlightCard>
       </Link>
       <Link href={PAGES.viteReact.path}>
-        <Card className="items-center gap-3">
+        <SpotlightCard className="items-center gap-3">
           <Vite />
           Vite React
-        </Card>
+        </SpotlightCard>
       </Link>
     </div>
   );
