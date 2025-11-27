@@ -1,5 +1,12 @@
 {
-  "quick-start": { "display": "Quick Start" },
-  "next-js": { "display": "Next.js" },
-  "vite-react": { "display": "Vite React" }
+  "introduction": { "display": "Introduction" },
+
+  "frameworks": {
+    "display": "Frameworks",
+    "next-js": { "display": "Next.js" },
+    "vite-react": {
+      "display": "Vite React",
+      "messages-loading": { "display": "Messages Loading" }
+    }
+  }
 }

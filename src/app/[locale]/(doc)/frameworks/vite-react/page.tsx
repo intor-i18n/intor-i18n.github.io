@@ -3,9 +3,8 @@ import { PAGES } from "@/config/pages";
 import { intorConfig } from "@/infrastructure/i18n/intor-config";
 import { mdReader } from "@/infrastructure/i18n/md-reader";
 import { Content } from "@/interfaces/components/content/content";
-import { FrameworkCards } from "@/interfaces/components/pages/quick-start/framework-cards";
 
-export default async function QuickStartPage({
+export default async function ViteReactPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -20,11 +19,12 @@ export default async function QuickStartPage({
   return (
     <>
       <Content
-        breadcrumbs={[{ i18nKey: PAGES.quickStart.i18nKey }]}
-        content={t("articles.quick-start.content")}
-      >
-        <FrameworkCards />
-      </Content>
+        breadcrumbs={[
+          { title: PAGES.frameworks.title, path: PAGES.frameworks.path },
+          { title: PAGES.frameworks.viteReact.title },
+        ]}
+        content={t(PAGES.frameworks.viteReact.content)}
+      />
     </>
   );
 }

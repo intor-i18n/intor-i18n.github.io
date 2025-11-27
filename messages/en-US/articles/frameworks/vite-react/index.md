@@ -1,6 +1,7 @@
 # Vite React
 
-In a Vite + React project, Intor provides a lightweight way to integrate multi-language support. It allows preloading translation content or dynamically splitting language resources while keeping performance and flexibility.
+This page shows the minimal setup for integrating Intor with Vite + React, including preparing message files, configuring Intor, and initializing the Context.  
+These steps form the core usage pattern in typical front-end projects.
 
 > The following examples use TypeScript, but JavaScript can also be used.
 
@@ -153,6 +154,7 @@ import zhTW from "../messages/zh-TW/index.json";
 
 export const intorConfig = defineIntorConfig({
   defaultLocale: "en-US",
+  supportedLocales: ["en-US", "zh-TW"],
   messages: {
     "en-US": enUS,
     "zh-TW": zhTW,
@@ -243,139 +245,20 @@ function App() {
 export default App;
 ```
 
-Next, we will explain the two ways of loading `messages` based on project requirements.
-
----
-
-## Message Loading Methods
-
-### Static Import
-
-> Static import is the simplest and most straightforward approach.
-
-As demonstrated in the previous steps, we have already completed the static import of all `messages` into the project configuration.  
-Refer to #2 Intor Configuration [♯2 Intor Configuration](#2-intor-configuration).
-
-```ts ui=CodeTabs
----
-title: src/intor-config.ts
----
-import enUS from "../messages/en-US/index.json";
-```
-
-### Dynamic Import by Locale
-
-> If your messages are large or you want to reduce the initial bundle size, consider using dynamic import to load messages by locale.
-
-We can create a dedicated `I18nProvider` component to wrap `<App />`, which:
-
-- Loads messages for the current locale on initialization
-- Updates messages dynamically when switching locales without reloading the page
-
-You need to use this `I18nProvider` in `main.tsx` to provide a global locale context to your application.
-
-```json ui=Files
-{
-  "src": {
-    "type": "folder",
-    "children": {
-      "intor-config.ts": {
-        "type": "file",
-        "gitStatus": "modified"
-      },
-      "main.tsx": {
-        "type": "file",
-        "gitStatus": "modified"
-      },
-      "i18n-provider.tsx": {
-        "type": "file",
-        "gitStatus": "untracked"
-      }
-    }
-  }
-}
-```
-
-- When using dynamic imports, you must specify `supportedLocales`.
-
-```ts ui=CodeTabs
----
-title: src/intor-config.ts
----
-import { defineIntorConfig } from "intor/config";
-
-export const intorConfig = defineIntorConfig({
-  defaultLocale: "en-US",
-  supportedLocales: ["en-US", "zh-TW"], // Add this
-  // ...
-});
-```
-
-```tsx ui=CodeTabs
----
-title: src/main.tsx
----
-// ...
-import { I18nProvider } from "./i18n-provider.tsx";
-
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <I18nProvider />
-  </StrictMode>,
-);
-```
-
-```tsx ui=CodeTabs
----
-title: src/i18n-provider.tsx
----
-// ...
-import App from "./App.tsx";
-import { mergeMessages, type LocaleMessages } from "intor";
-import { getInitialLocale, IntorProvider } from "intor/react";
-import { intorConfig } from "./i18n-config.ts";
-
-// Dynamically load messages for the specified locale
-const importMessages = async (locale: string) => ({
-  [locale]: (await import(`../messages/${locale}/index.json`)).default,
-});
-
-// Initialize locale and load corresponding messages
-const initialLocale = getInitialLocale(intorConfig);
-const initialMessages = await importMessages(initialLocale);
-
-export function I18nProvider() {
-  // Store and manage the current messages
-  const [messages, setMessages] = useState<LocaleMessages>(
-    mergeMessages(intorConfig.messages, initialMessages),
-  );
-
-  return (
-    <IntorProvider
-      value={{
-        config: intorConfig,
-        initialLocale,
-        messages: mergeMessages(intorConfig.messages, messages),
-        onLocaleChange: async (newLocale: string) => {
-          const loadedMessages = await importMessages(newLocale);
-          setMessages(mergeMessages(intorConfig.messages, loadedMessages));
-        },
-      }}
-    >
-      <App />
-    </IntorProvider>
-  );
-}
-```
-
 ---
 
 ## Next Steps
 
 ```tsx ui=Card
 ---
+title: Messages Loading
+href: /frameworks/vite-react/messages-loading
+---
+Use @intor/cli to automatically generate types and enjoy full IntelliSense support with strong type safety throughout your development workflow.
+
+---
 title: Type Generation & IntelliSense
-href: quick-start
+href: /frameworks/vite-react/messages-loading
 ---
 Use @intor/cli to automatically generate types and enjoy full IntelliSense support with strong type safety throughout your development workflow.
 ```

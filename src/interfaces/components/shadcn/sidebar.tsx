@@ -29,7 +29,7 @@ import { NAVBAR_HEIGHT } from "@/interfaces/styles/constants";
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
-const SIDEBAR_WIDTH = "16rem";
+const SIDEBAR_WIDTH = "18rem";
 const SIDEBAR_WIDTH_MOBILE = "18rem";
 const SIDEBAR_WIDTH_ICON = "3rem";
 const SIDEBAR_KEYBOARD_SHORTCUT = "b";
@@ -654,7 +654,9 @@ function SidebarMenuSub({ className, ...props }: React.ComponentProps<"ul">) {
       data-slot="sidebar-menu-sub"
       data-sidebar="menu-sub"
       className={cn(
-        "border-sidebar-border mx-3.5 flex min-w-0 translate-x-px flex-col gap-1 border-l px-2.5 py-0.5",
+        // "mx-3.5 px-2.5",
+        "ml-3.5 pl-2.5",
+        "border-sidebar-border flex min-w-0 translate-x-px flex-col gap-1 border-l py-0.5",
         "group-data-[collapsible=icon]:hidden",
         className,
       )}

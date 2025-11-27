@@ -50,7 +50,11 @@ export default async function RootLayout({ params, children }: Props) {
   );
 
   return (
-    <html lang={value.initialLocale} suppressHydrationWarning>
+    <html
+      lang={value.initialLocale}
+      suppressHydrationWarning
+      data-scroll-behavior="smooth"
+    >
       <body
         id="web-root"
         className="flex justify-center antialiased"

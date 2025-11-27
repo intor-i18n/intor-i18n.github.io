@@ -25,7 +25,7 @@ export function Content({
 }: {
   content?: string;
   children?: ReactNode;
-  breadcrumbs: Array<{ i18nKey: string; path?: string }>;
+  breadcrumbs: Array<{ title: string; path?: string }>;
 }) {
   const { t } = useTranslator();
   const { headings } = useMarkdownHeadings(content);
@@ -44,17 +44,17 @@ export function Content({
           style={{ height: BREADCRUMBS_HEIGHT }}
         >
           <BreadcrumbList>
-            {breadcrumbs.map(({ i18nKey, path }, index) => {
+            {breadcrumbs.map(({ title, path }, index) => {
               const isLast = breadcrumbs.length === index + 1;
               return (
                 <Fragment key={index}>
                   <BreadcrumbItem>
                     {!isLast ? (
                       <BreadcrumbLink asChild>
-                        <Link href={path}>{t(i18nKey)}</Link>
+                        <Link href={path}>{t(title)}</Link>
                       </BreadcrumbLink>
                     ) : (
-                      <BreadcrumbPage>{t(i18nKey)}</BreadcrumbPage>
+                      <BreadcrumbPage>{t(title)}</BreadcrumbPage>
                     )}
                   </BreadcrumbItem>
 

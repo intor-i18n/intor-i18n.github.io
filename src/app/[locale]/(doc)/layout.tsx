@@ -16,10 +16,10 @@ export default function DocLayout({ children }: Props) {
         style={{ maxWidth: LAYOUT_MAX_WIDTH }}
       >
         {/* Sidebar */}
-        <AppSidebar className="w-[16rem]" />
+        <AppSidebar className="w-[18rem]" />
 
         {/* Main */}
-        <div className="w-full md:w-[calc(100%-16rem)]">{children}</div>
+        <div className="w-full md:w-[calc(100%-18rem)]">{children}</div>
       </div>
 
       <footer className="mt-12 h-96 border-t bg-linear-0 from-slate-100/10 to-slate-300/10"></footer>

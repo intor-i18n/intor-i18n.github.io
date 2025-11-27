@@ -9,13 +9,13 @@ import { SpotlightCard } from "@/interfaces/components/shadcn/spotlight-card/spo
 export function FrameworkCards() {
   return (
     <div className="mt-6 grid grid-cols-2 gap-6">
-      <Link href={PAGES.nextJs.path}>
+      <Link href={PAGES.frameworks.nextJs.path}>
         <SpotlightCard className="items-center gap-3">
           <Nextjs />
           Next.js
         </SpotlightCard>
       </Link>
-      <Link href={PAGES.viteReact.path}>
+      <Link href={PAGES.frameworks.viteReact.path}>
         <SpotlightCard className="items-center gap-3">
           <Vite />
           Vite React

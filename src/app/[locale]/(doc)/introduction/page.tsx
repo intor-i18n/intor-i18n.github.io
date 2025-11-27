@@ -4,7 +4,7 @@ import { intorConfig } from "@/infrastructure/i18n/intor-config";
 import { mdReader } from "@/infrastructure/i18n/md-reader";
 import { Content } from "@/interfaces/components/content/content";
 
-export default async function ViteReactPage({
+export default async function IntroductionPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -19,12 +19,9 @@ export default async function ViteReactPage({
   return (
     <>
       <Content
-        breadcrumbs={[
-          { i18nKey: PAGES.quickStart.i18nKey, path: PAGES.quickStart.path },
-          { i18nKey: PAGES.viteReact.i18nKey },
-        ]}
-        content={t("articles.vite-react.content")}
-      />
+        breadcrumbs={[{ title: PAGES.introduction.title }]}
+        content={t(PAGES.introduction.content)}
+      ></Content>
     </>
   );
 }

@@ -1,6 +1,7 @@
 # Vite React
 
-在 Vite + React 的專案中，Intor 能以輕量的方式整合多語系，不論是預先載入翻譯內容，或依需求分拆語系資源，都能保持快速與彈性。
+本頁示範 Intor 在 Vite + React 專案中的最小整合流程，包括語言檔配置、基本設定與 Context 初始化。  
+這些步驟構成 Intor 在前端環境中的核心使用模式。
 
 > 以下範例使用 TypeScript，亦可使用 JavaScript。
 
@@ -39,7 +40,7 @@ bun add intor
 
 ## 專案結構
 
-以下提供最簡化的 **Intor** 配置範例，實際目錄與命名可依專案需求調整：
+以下提供最簡化的 Intor 配置範例，實際目錄與命名可依專案需求調整：
 
 ```json ui=Files
 {
@@ -152,6 +153,7 @@ import zhTW from "../messages/zh-TW/index.json";
 
 export const intorConfig = defineIntorConfig({
   defaultLocale: "en-US",
+  supportedLocales: ["en-US", "zh-TW"],
   messages: {
     "en-US": enUS,
     "zh-TW": zhTW,
@@ -164,7 +166,7 @@ export const intorConfig = defineIntorConfig({
 ### ♯3 初始化 Context
 
 在 React 應用中，需要用 `IntorProvider` 包裹 `<App />`，以提供翻譯 Context。  
-建議使用 **Intor** 內建的 `getInitialLocale()`，可自動偵測使用者的 `cookie` 與 `瀏覽器語系`：
+建議使用 Intor 內建的 `getInitialLocale()`，可自動偵測使用者的 `cookie` 與 `瀏覽器語系`：
 
 ```json ui=Files
 {
@@ -202,7 +204,7 @@ createRoot(document.getElementById("root")!).render(
 
 ## 使用範例
 
-下面示範的是一個最精簡的 `<App />`，讓您能迅速掌握 **Intor** 的核心使用方式。  
+下面示範的是一個最精簡的 `<App />`，讓您能迅速掌握 Intor 的核心使用方式。  
 透過 `useTranslator` 這個 hook，我們可以取得 t 與 setLocale：
 
 - `t` (translate) 用來翻譯文字
@@ -242,139 +244,20 @@ function App() {
 export default App;
 ```
 
-接下來，我們再依照不同的專案需求，介紹兩種 `messages` 的載入方式。
-
----
-
-## 語言檔匯入方式
-
-### 靜態匯入
-
-> 靜態匯入是最簡單直接的方式。
-
-上面的步驟已經完成了靜態匯入的配置：直接把各語系的 `messages` 載入專案中，就能立即使用。  
-詳見前面的 [♯2 Intor 設定](#2-intor-設定configuration)。
-
-```ts ui=CodeTabs
----
-title: src/intor-config.ts
----
-import enUS from "../messages/en-US/index.json";
-```
-
-### 依語系動態匯入
-
-> 如果專案中的 messages 很大，或希望減少初次建置的 bundle 體積，可以考慮使用 Dynamic Import，依使用者語系動態載入對應的 messages
-
-在此範例中，我們建立一個專門的組件 `I18nProvider` 來包裹 `<App />`，負責：
-
-- 初始化時載入當前語系的 messages
-- 支援在切換語系時動態更新 messages，而不需要重新載入整個頁面
-
-同時，需要在 `main.tsx` 中使用這個 `I18nProvider`，以便提供全局語系 Context 給應用程式。
-
-```json ui=Files
-{
-  "src": {
-    "type": "folder",
-    "children": {
-      "intor-config.ts": {
-        "type": "file",
-        "gitStatus": "modified"
-      },
-      "main.tsx": {
-        "type": "file",
-        "gitStatus": "modified"
-      },
-      "i18n-provider.tsx": {
-        "type": "file",
-        "gitStatus": "untracked"
-      }
-    }
-  }
-}
-```
-
-- 使用動態匯入時，必需指定 `supportedLocales`
-
-```ts ui=CodeTabs
----
-title: src/intor-config.ts
----
-import { defineIntorConfig } from "intor/config";
-
-export const intorConfig = defineIntorConfig({
-  defaultLocale: "en-US",
-  supportedLocales: ["en-US", "zh-TW"], // 加上這個
-  // ...
-});
-```
-
-```tsx ui=CodeTabs
----
-title: src/main.tsx
----
-// ...
-import { I18nProvider } from "./i18n-provider.tsx";
-
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <I18nProvider />
-  </StrictMode>,
-);
-```
-
-```tsx ui=CodeTabs
----
-title: src/i18n-provider.tsx
----
-// ...
-import App from "./App.tsx";
-import { mergeMessages, type LocaleMessages } from "intor";
-import { getInitialLocale, IntorProvider } from "intor/react";
-import { intorConfig } from "./i18n-config.ts";
-
-// 動態載入指定語系的 messages
-const importMessages = async (locale: string) => ({
-  [locale]: (await import(`../messages/${locale}/index.json`)).default,
-});
-
-// 初始化語系並載入對應的 messages
-const initialLocale = getInitialLocale(intorConfig);
-const initialMessages = await importMessages(initialLocale);
-
-export function I18nProvider() {
-  // 儲存並管理目前的 messages
-  const [messages, setMessages] = useState<LocaleMessages>(
-    mergeMessages(intorConfig.messages, initialMessages),
-  );
-
-  return (
-    <IntorProvider
-      value={{
-        config: intorConfig,
-        initialLocale,
-        messages: mergeMessages(intorConfig.messages, messages),
-        onLocaleChange: async (newLocale: string) => {
-          const loadedMessages = await importMessages(newLocale);
-          setMessages(mergeMessages(intorConfig.messages, loadedMessages));
-        },
-      }}
-    >
-      <App />
-    </IntorProvider>
-  );
-}
-```
-
 ---
 
 ## 下一步行動
 
 ```tsx ui=Card
 ---
+title: 語言檔載入
+href: /frameworks/vite-react/messages-loading
+---
+我們會示範三種常見方式：靜態 Import、動態 Import，以及 遠端 Fetch，讓你依需求選擇最適合的策略。
+
+---
 title: 型別生成與 IntelliSense
-href: quick-start
+href: /frameworks/vite-react/messages-loading
 ---
 透過 @intor/cli 自動生成型別，讓您的開發過程具備完整的 IntelliSense 體驗與安全的型別支援。
 ```

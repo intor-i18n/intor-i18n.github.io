@@ -20,10 +20,10 @@ export default async function NextJsPage({
     <>
       <Content
         breadcrumbs={[
-          { i18nKey: PAGES.quickStart.i18nKey, path: PAGES.quickStart.path },
-          { i18nKey: PAGES.nextJs.i18nKey },
+          { title: PAGES.frameworks.title, path: PAGES.frameworks.path },
+          { title: PAGES.frameworks.nextJs.title },
         ]}
-        content={t("articles.next-js.content")}
+        content={t(PAGES.frameworks.nextJs.content)}
       ></Content>
     </>
   );

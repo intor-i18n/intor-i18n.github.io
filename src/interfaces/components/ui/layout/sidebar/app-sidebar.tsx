@@ -1,7 +1,7 @@
 "use client";
 
-import { Link, usePathname, useTranslator } from "intor/next";
-import { BookCopy, Rocket, Settings, Tag, Type } from "lucide-react";
+import { Link } from "intor/next";
+import { BookCopy, Package, Settings, Sparkles, Tag, Type } from "lucide-react";
 import * as React from "react";
 import { cn } from "@/applications/shadcn/lib/utils";
 import { PAGES } from "@/config/pages";
@@ -13,45 +13,62 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
   useSidebar,
 } from "@/interfaces/components/shadcn/sidebar";
+import { NavMain } from "@/interfaces/components/ui/layout/sidebar/nav-main";
+
+type NavItem = {
+  icon?: React.ReactNode;
+  title: string;
+  path: string;
+  items?: NavItem[];
+};
 
 // This is sample data.
-const data = {
+const data: { navMain: NavItem[] } = {
   navMain: [
     {
-      icon: <Rocket />,
-      i18nKey: PAGES.quickStart.i18nKey,
-      path: PAGES.quickStart.path,
+      icon: <Sparkles />,
+      title: PAGES.introduction.title,
+      path: PAGES.introduction.path,
+    },
+
+    {
+      icon: <Package />,
+      title: PAGES.frameworks.title,
+      path: PAGES.frameworks.path,
       items: [
         {
-          title: PAGES.nextJs.i18nKey,
-          path: PAGES.nextJs.path,
+          title: PAGES.frameworks.nextJs.title,
+          path: PAGES.frameworks.nextJs.path,
         },
         {
-          title: PAGES.viteReact.i18nKey,
-          path: PAGES.viteReact.path,
+          title: PAGES.frameworks.viteReact.title,
+          path: PAGES.frameworks.viteReact.path,
+          items: [
+            {
+              title: PAGES.frameworks.viteReact.messagesLoading.title,
+              path: PAGES.frameworks.viteReact.messagesLoading.path,
+            },
+          ],
         },
       ],
     },
     {
       icon: <Settings />,
-      i18nKey: "設定物件",
+      title: "設定物件",
       path: "PAGES.quickStart.path",
       items: [],
     },
     {
       icon: <BookCopy />,
-      i18nKey: "語言檔",
+      title: "語言檔",
       path: "PAGES.quickStart.path",
       items: [],
     },
     {
       icon: <Type />,
-      i18nKey: "型別生成 & IntelliSense",
+      title: "型別生成 & IntelliSense",
       path: "PAGES.quickStart.path",
       items: [],
     },
@@ -61,9 +78,6 @@ const data = {
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { state } = useSidebar();
   const isCollapsed = state === "collapsed";
-
-  const { t } = useTranslator();
-  const { unprefixedPathname } = usePathname();
 
   return (
     <Sidebar variant="floating" {...props}>
@@ -92,39 +106,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <SidebarGroup>
           <SidebarMenu className="gap-2 whitespace-nowrap">
-            {data.navMain.map((item) => (
-              <SidebarMenuItem key={item.i18nKey}>
-                <SidebarMenuButton
-                  asChild
-                  isActive={unprefixedPathname.startsWith(item.path)}
-                >
-                  <Link
-                    href={item.path}
-                    className={cn(
-                      "font-medium",
-                      unprefixedPathname === item.path && "pointer-events-none",
-                    )}
-                  >
-                    {item.icon}
-                    {t(item.i18nKey)}
-                  </Link>
-                </SidebarMenuButton>
-                {item.items?.length ? (
-                  <SidebarMenuSub className="ml-0 border-l-0 px-1.5">
-                    {item.items.map((item) => (
-                      <SidebarMenuSubItem key={item.title}>
-                        <SidebarMenuSubButton
-                          asChild
-                          isActive={unprefixedPathname.startsWith(item.path)}
-                        >
-                          <Link href={item.path}>{t(item.title)}</Link>
-                        </SidebarMenuSubButton>
-                      </SidebarMenuSubItem>
-                    ))}
-                  </SidebarMenuSub>
-                ) : null}
-              </SidebarMenuItem>
-            ))}
+            <NavMain items={data.navMain} />
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
