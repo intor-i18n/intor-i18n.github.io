@@ -278,17 +278,36 @@ import enUS from "../messages/en-US/index.json";
   "src": {
     "type": "folder",
     "children": {
-      "i18n-provider.tsx": {
+      "intor-config.ts": {
         "type": "file",
-        "gitStatus": "untracked"
+        "gitStatus": "modified"
       },
       "main.tsx": {
         "type": "file",
         "gitStatus": "modified"
+      },
+      "i18n-provider.tsx": {
+        "type": "file",
+        "gitStatus": "untracked"
       }
     }
   }
 }
+```
+
+- 使用動態匯入時，必需指定 `supportedLocales`
+
+```ts ui=CodeTabs
+---
+title: src/intor-config.ts
+---
+import { defineIntorConfig } from "intor/config";
+
+export const intorConfig = defineIntorConfig({
+  defaultLocale: "en-US",
+  supportedLocales: ["en-US", "zh-TW"], // 加上這個
+  // ...
+});
 ```
 
 ```tsx ui=CodeTabs
