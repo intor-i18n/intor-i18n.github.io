@@ -2,20 +2,20 @@
 
 // Map
 export const LOCALES_MAP = {
-  EnUS: "en-US",
-  ZhTW: "zh-TW",
+  EN_US: "en-US",
+  ZH_TW: "zh-TW",
 } as const;
 
 // Array
 export const LOCALES_ARRAY = Object.values(LOCALES_MAP);
 
 // Default Locale
-export const DEFAULT_LOCALE = LOCALES_MAP.EnUS;
+export const DEFAULT_LOCALE = LOCALES_MAP.EN_US;
 
 // Display
 export const LOCALE_DISPLAY = {
-  [LOCALES_MAP.EnUS]: "English",
-  [LOCALES_MAP.ZhTW]: "中文",
+  [LOCALES_MAP.EN_US]: "English",
+  [LOCALES_MAP.ZH_TW]: "中文",
 };
 
 //====== Types ======

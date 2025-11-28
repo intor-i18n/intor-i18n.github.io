@@ -18,7 +18,7 @@ See [Vite React ♯2 Intor Configuration](../vite-react#2-intor-configuration) f
 ---
 title: src/intor-config.ts
 ---
-import enUS from "../messages/en-US/index.json";
+import EN_US from "../messages/en-US/index.json";
 ```
 
 ---
@@ -66,11 +66,11 @@ createRoot(document.getElementById("root")!).render(
 ---
 title: src/i18n-provider.tsx
 ---
-// ...
-import App from "./App.tsx";
+import { useState } from "react";
 import { mergeMessages, type LocaleMessages } from "intor";
 import { getInitialLocale, IntorProvider } from "intor/react";
-import { intorConfig } from "./i18n-config.ts";
+import { intorConfig } from "./intor-config.ts";
+import App from "./App.tsx";
 
 // Helper function: dynamically import messages for a specific locale
 const importMessages = async (locale: string) => ({
@@ -155,11 +155,11 @@ createRoot(document.getElementById("root")!).render(
 ---
 title: src/i18n-provider.tsx
 ---
-// ...
-import App from "./App.tsx";
+import { useState } from "react";
 import { mergeMessages, type LocaleMessages } from "intor";
 import { getInitialLocale, IntorProvider } from "intor/react";
-import { intorConfig } from "./i18n-config.ts";
+import { intorConfig } from "./intor-config.ts";
+import App from "./App.tsx";
 
 // Helper function: fetch messages for a specific locale
 const fetchMessages = async (locale: string) => {

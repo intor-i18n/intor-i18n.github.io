@@ -147,14 +147,14 @@ title: messages/zh-TW/index.json
 title: src/intor-config.ts
 ---
 import { defineIntorConfig } from "intor/config";
-import enUS from "../messages/en-US/index.json";
-import zhTW from "../messages/zh-TW/index.json";
+import EN_US from "../messages/en-US/index.json";
+import ZH_TW from "../messages/zh-TW/index.json";
 
 export const intorConfig = defineIntorConfig({
   defaultLocale: "en-US",
   messages: {
-    "en-US": enUS,
-    "zh-TW": zhTW,
+    "en-US": EN_US,
+    "zh-TW": ZH_TW,
   },
 });
 ```
@@ -181,7 +181,7 @@ title: src/main.tsx
 ---
 // ...
 import { IntorProvider, getInitialLocale } from "intor/react";
-import { intorConfig } from "./i18n-config.ts";
+import { intorConfig } from "./intor-config.ts";
 
 const initialLocale = getInitialLocale(intorConfig);
 
@@ -259,7 +259,7 @@ export default App;
 ---
 title: src/intor-config.ts
 ---
-import enUS from "../messages/en-US/index.json";
+import EN_US from "../messages/en-US/index.json";
 ```
 
 ### 依語系動態匯入
@@ -313,7 +313,7 @@ title: src/i18n-provider.tsx
 import App from "./App.tsx";
 import { mergeMessages, type LocaleMessages } from "intor";
 import { getInitialLocale, IntorProvider } from "intor/react";
-import { intorConfig } from "./i18n-config.ts";
+import { intorConfig } from "./intor-config.ts";
 
 // 動態載入指定語系的 messages
 const importMessages = async (locale: string) => ({
