@@ -15,6 +15,7 @@ export function Code({
 }: ExtraProps & HTMLAttributes<HTMLElement>) {
   const { content, meta, lang } = parseCode(children, node);
 
+  // Default
   if (!meta.ui) {
     return (
       <code className="text-primary bg-primary-foreground hover:bg-secondary m-[0_0.1em] inline-block rounded-md border p-[0.1em_0.5em] text-sm whitespace-pre-wrap duration-150">
@@ -23,13 +24,13 @@ export function Code({
     );
   }
 
-  // [ui] Files
-  if (meta.ui === "Files") {
+  // [ui] files
+  if (meta.ui === "files") {
     return <CodeFiles content={content} className="mt-6" />;
   }
 
-  // [ui] CodeTabs
-  if (meta.ui === "CodeTabs") {
+  // [ui] code-tabs
+  if (meta.ui === "code-tabs") {
     const codeItems = toCodeItems(content);
     const obj: Record<string, string> = {};
     for (const item of codeItems) {
@@ -38,8 +39,8 @@ export function Code({
     return <CodeTabs lang={lang} codes={obj} className="mt-6" />;
   }
 
-  // [ui] Card
-  if (meta.ui === "Card") {
+  // [ui] card
+  if (meta.ui === "card") {
     const codeItems = toCodeItems(content);
     return (
       <div className="mt-6 grid grid-cols-2 gap-6 font-[sans-serif]">

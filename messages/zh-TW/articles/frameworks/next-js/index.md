@@ -13,7 +13,7 @@
 
 安裝 Intor：
 
-```bash ui=CodeTabs
+```bash ui=code-tabs
 ---
 title: npm
 ---
@@ -41,7 +41,7 @@ bun add intor
 
 以下提供最簡化的 **Intor** 配置範例，實際目錄與命名可依專案需求調整：
 
-```json ui=Files
+```json ui=files
 {
   "myapp": {
     "isRoot": "true",
@@ -84,7 +84,7 @@ bun add intor
 
 在專案中建立 `messages` 資料夾，並依語系建立子資料夾，每個語系提供一個 `index.json`：
 
-```json ui=Files
+```json ui=files
 {
   "messages": {
     "type": "folder",
@@ -109,7 +109,7 @@ bun add intor
 }
 ```
 
-```json ui=CodeTabs
+```json ui=code-tabs
 ---
 title: messages/en-US/index.json
 ---
@@ -118,7 +118,7 @@ title: messages/en-US/index.json
 }
 ```
 
-```json ui=CodeTabs
+```json ui=code-tabs
 ---
 title: messages/zh-TW/index.json
 ---
@@ -133,7 +133,7 @@ title: messages/zh-TW/index.json
 
 建立全域設定檔 `intorConfig`，靜態匯入 `messages`：
 
-```json ui=Files
+```json ui=files
 {
   "intor-config.ts": {
     "type": "file",
@@ -142,7 +142,7 @@ title: messages/zh-TW/index.json
 }
 ```
 
-```ts ui=CodeTabs
+```ts ui=code-tabs
 ---
 title: src/intor-config.ts
 ---
@@ -166,7 +166,7 @@ export const intorConfig = defineIntorConfig({
 在 React 應用中，需要用 `IntorProvider` 包裹 `<App />`，以提供翻譯 Context。  
 建議使用 **Intor** 內建的 `getInitialLocale()`，可自動偵測使用者的 `cookie` 與 `瀏覽器語系`：
 
-```json ui=Files
+```json ui=files
 {
   "main.tsx": {
     "type": "file",
@@ -175,7 +175,7 @@ export const intorConfig = defineIntorConfig({
 }
 ```
 
-```tsx ui=CodeTabs
+```tsx ui=code-tabs
 ---
 title: src/main.tsx
 ---
@@ -208,7 +208,7 @@ createRoot(document.getElementById("root")!).render(
 - `t` (translate) 用來翻譯文字
 - `setLocale` 用來切換當前語系。
 
-```json ui=Files
+```json ui=files
 {
   "App.tsx": {
     "type": "file",
@@ -217,7 +217,7 @@ createRoot(document.getElementById("root")!).render(
 }
 ```
 
-```tsx ui=CodeTabs
+```tsx ui=code-tabs
 ---
 title: src/App.tsx
 ---
@@ -255,7 +255,7 @@ export default App;
 上面的步驟已經完成了靜態匯入的配置：直接把各語系的 `messages` 載入專案中，就能立即使用。  
 詳見前面的 [♯2 Intor 設定](#2-intor-設定configuration)。
 
-```ts ui=CodeTabs
+```ts ui=code-tabs
 ---
 title: src/intor-config.ts
 ---
@@ -273,7 +273,7 @@ import enUS from "../messages/en-US/index.json";
 
 同時，需要在 `main.tsx` 中使用這個 `I18nProvider`，以便提供全局語系 Context 給應用程式。
 
-```json ui=Files
+```json ui=files
 {
   "src": {
     "type": "folder",
@@ -291,7 +291,7 @@ import enUS from "../messages/en-US/index.json";
 }
 ```
 
-```tsx ui=CodeTabs
+```tsx ui=code-tabs
 ---
 title: src/main.tsx
 ---
@@ -305,7 +305,7 @@ createRoot(document.getElementById("root")!).render(
 );
 ```
 
-```tsx ui=CodeTabs
+```tsx ui=code-tabs
 ---
 title: src/i18n-provider.tsx
 ---
@@ -352,7 +352,7 @@ export function I18nProvider() {
 
 ## 下一步行動
 
-```tsx ui=Card
+```tsx ui=card
 ---
 title: 型別生成與 IntelliSense
 href: quick-start

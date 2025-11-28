@@ -3,5 +3,5 @@
 import { Link } from "intor/next";
 
 export function PageCsr() {
-  return <Link href={"/quick-start"}>START</Link>;
+  return <Link href={"/introduction"}>START</Link>;
 }

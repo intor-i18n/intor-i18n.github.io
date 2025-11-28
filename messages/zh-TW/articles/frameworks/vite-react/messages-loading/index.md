@@ -14,7 +14,7 @@
 使用靜態 Import 時，你只需要在專案中直接引入各語系的 `messages`，Intor 會立刻取得並使用它們。  
 詳見 [Vite React ♯2 Intor 設定](../vite-react#2-intor-設定configuration)。
 
-```ts ui=CodeTabs
+```ts ui=code-tabs
 ---
 title: src/intor-config.ts
 ---
@@ -30,7 +30,7 @@ import enUS from "../messages/en-US/index.json";
 範例中，我們用 `I18nProvider` 包裹 `<App />`，管理語系與對應的 `messages`，並提供切換語系時的 `onLocaleChange` 與 `isLoading` 狀態。  
 將它放在 `main.tsx`，即可提供全局語系 Context 給應用程式。
 
-```json ui=Files
+```json ui=files
 {
   "src": {
     "type": "folder",
@@ -48,7 +48,7 @@ import enUS from "../messages/en-US/index.json";
 }
 ```
 
-```tsx ui=CodeTabs
+```tsx ui=code-tabs
 ---
 title: src/main.tsx
 ---
@@ -62,7 +62,7 @@ createRoot(document.getElementById("root")!).render(
 );
 ```
 
-```tsx ui=CodeTabs
+```tsx ui=code-tabs
 ---
 title: src/i18n-provider.tsx
 ---
@@ -116,7 +116,7 @@ export function I18nProvider() {
 範例中，我們用 `I18nProvider` 包裹 `<App />`，管理語系與對應的 `messages`，並提供切換語系時的 `onLocaleChange` 與 `isLoading` 狀態。  
 將它放在 `main.tsx`，即可提供全局語系 Context 給應用程式。
 
-```json ui=Files
+```json ui=files
 {
   "src": {
     "type": "folder",
@@ -134,7 +134,7 @@ export function I18nProvider() {
 }
 ```
 
-```tsx ui=CodeTabs
+```tsx ui=code-tabs
 ---
 title: src/main.tsx
 ---
@@ -151,7 +151,7 @@ createRoot(document.getElementById("root")!).render(
 - 這邊我們使用文件提供的遠端 URL `https://intor-i18n.github.io/messages/${locale}/` 作為示範來源。  
   取得的資料格式為： `{ greeting: string }`
 
-```tsx ui=CodeTabs
+```tsx ui=code-tabs
 ---
 title: src/i18n-provider.tsx
 ---
@@ -200,6 +200,38 @@ export function I18nProvider() {
 }
 ```
 
+您也可以將語言檔放置在 Vite + React 專案的 `public` 資料夾，作為本地測試或遠端資源使用：
+
+```json ui=files
+{
+  "public": {
+    "type": "folder",
+    "gitStatus": "modified",
+    "children": {
+      "messages": {
+        "type": "folder",
+        "gitStatus": "untracked"
+      }
+    }
+  }
+}
+```
+
+```tsx ui=code-tabs
+---
+title: src/i18n-provider.tsx
+---
+// ...
+const fetchMessages = async (locale: string) => {
+  return {
+    [locale]: await fetch(
+      `http://localhost:5173/messages/${locale}/index.json`,
+    ).then((r) => r.json()),
+  };
+};
+// ...
+```
+
 ---
 
 ## 注意事項
@@ -210,7 +242,7 @@ export function I18nProvider() {
 
 ## 下一步行動
 
-```tsx ui=Card
+```tsx ui=card
 ---
 title: Translate Handlers
 href: quick-start

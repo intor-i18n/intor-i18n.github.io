@@ -14,7 +14,7 @@ We’ll showcase three common loading strategies: **Static Import**, **Dynamic I
 With static import, you simply include the language messages directly in your project, and Intor will immediately use them.  
 See [Vite React ♯2 Intor Configuration](../vite-react#2-intor-configuration) for details.
 
-```ts ui=CodeTabs
+```ts ui=code-tabs
 ---
 title: src/intor-config.ts
 ---
@@ -30,7 +30,7 @@ import enUS from "../messages/en-US/index.json";
 In this example, we wrap `<App />` with an `I18nProvider` that manages the locale and corresponding messages, and provides `onLocaleChange` logic and an `isLoading` state.  
 Place it in `main.tsx` to provide a global locale context to your app.
 
-```json ui=Files
+```json ui=files
 {
   "src": {
     "type": "folder",
@@ -48,7 +48,7 @@ Place it in `main.tsx` to provide a global locale context to your app.
 }
 ```
 
-```tsx ui=CodeTabs
+```tsx ui=code-tabs
 ---
 title: src/main.tsx
 ---
@@ -62,7 +62,7 @@ createRoot(document.getElementById("root")!).render(
 );
 ```
 
-```tsx ui=CodeTabs
+```tsx ui=code-tabs
 ---
 title: src/i18n-provider.tsx
 ---
@@ -116,7 +116,7 @@ export function I18nProvider() {
 In this example, we wrap `<App />` with an `I18nProvider` that manages the locale and corresponding messages, and provides `onLocaleChange` logic and an `isLoading` state.  
 Place it in `main.tsx` to provide a global locale context to your app.
 
-```json ui=Files
+```json ui=files
 {
   "src": {
     "type": "folder",
@@ -134,7 +134,7 @@ Place it in `main.tsx` to provide a global locale context to your app.
 }
 ```
 
-```tsx ui=CodeTabs
+```tsx ui=code-tabs
 ---
 title: src/main.tsx
 ---
@@ -151,7 +151,7 @@ createRoot(document.getElementById("root")!).render(
 - In this example, we use the demo URL provided in the documentation: `https://intor-i18n.github.io/messages/${locale}/`.  
   The fetched data has the format: `{ greeting: string }`.
 
-```tsx ui=CodeTabs
+```tsx ui=code-tabs
 ---
 title: src/i18n-provider.tsx
 ---
@@ -200,6 +200,38 @@ export function I18nProvider() {
 }
 ```
 
+You can also place your language files in the `public` folder of your Vite + React project, and use them as local test resources or remote assets:
+
+```json ui=files
+{
+  "public": {
+    "type": "folder",
+    "gitStatus": "modified",
+    "children": {
+      "messages": {
+        "type": "folder",
+        "gitStatus": "untracked"
+      }
+    }
+  }
+}
+```
+
+```tsx ui=code-tabs
+---
+title: src/i18n-provider.tsx
+---
+// ...
+const fetchMessages = async (locale: string) => {
+  return {
+    [locale]: await fetch(
+      `http://localhost:5173/messages/${locale}/index.json`,
+    ).then((r) => r.json()),
+  };
+};
+// ...
+```
+
 ---
 
 ## Notes
@@ -211,7 +243,7 @@ In a real-world project, it is recommended to implement proper error handling, l
 
 ## Next Steps
 
-```tsx ui=Card
+```tsx ui=card
 ---
 title: Translate Handlers
 href: quick-start

@@ -38,7 +38,7 @@ export function CodeFiles({
       const isRootFolder = node.type === "folder" && node.isRoot;
 
       if (node.type === "folder") {
-        const childFolderKeys = Object.entries(node.children)
+        const childFolderKeys = Object.entries(node.children ?? {})
           .filter(([, child]) => child.type === "folder")
           .map(([k]) => k);
 

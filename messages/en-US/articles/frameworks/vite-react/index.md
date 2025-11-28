@@ -14,7 +14,7 @@ If you haven’t created a project yet, refer to the official guide: [Vite Docum
 
 Install Intor:
 
-```bash ui=CodeTabs
+```bash ui=code-tabs
 ---
 title: npm
 ---
@@ -42,7 +42,7 @@ bun add intor
 
 Here’s a minimal **Intor** setup example. You can adjust folder names and structure according to your project needs:
 
-```json ui=Files
+```json ui=files
 {
   "myapp": {
     "isRoot": "true",
@@ -86,7 +86,7 @@ Here’s a minimal **Intor** setup example. You can adjust folder names and stru
 Create a `messages` folder in your project, and create a subfolder for each locale.  
 Each locale contains an `index.json` file:
 
-```json ui=Files
+```json ui=files
 {
   "messages": {
     "type": "folder",
@@ -111,7 +111,7 @@ Each locale contains an `index.json` file:
 }
 ```
 
-```json ui=CodeTabs
+```json ui=code-tabs
 ---
 title: messages/en-US/index.json
 ---
@@ -120,7 +120,7 @@ title: messages/en-US/index.json
 }
 ```
 
-```json ui=CodeTabs
+```json ui=code-tabs
 ---
 title: messages/zh-TW/index.json
 ---
@@ -135,7 +135,7 @@ title: messages/zh-TW/index.json
 
 Create a global configuration file `intorConfig` and statically import `messages`:
 
-```json ui=Files
+```json ui=files
 {
   "intor-config.ts": {
     "type": "file",
@@ -144,7 +144,7 @@ Create a global configuration file `intorConfig` and statically import `messages
 }
 ```
 
-```ts ui=CodeTabs
+```ts ui=code-tabs
 ---
 title: src/intor-config.ts
 ---
@@ -169,7 +169,7 @@ export const intorConfig = defineIntorConfig({
 Wrap `<App />` with `IntorProvider` to provide translation context.  
 It is recommended to use Intor’s built-in `getInitialLocale()` to automatically detect the user’s `cookie` or `browser language`:
 
-```json ui=Files
+```json ui=files
 {
   "main.tsx": {
     "type": "file",
@@ -178,7 +178,7 @@ It is recommended to use Intor’s built-in `getInitialLocale()` to automaticall
 }
 ```
 
-```tsx ui=CodeTabs
+```tsx ui=code-tabs
 ---
 title: src/main.tsx
 ---
@@ -211,7 +211,7 @@ With the `useTranslator` hook, you can access:
 - `t` (translate) to get translated text
 - `setLocale` to switch the current locale
 
-```json ui=Files
+```json ui=files
 {
   "App.tsx": {
     "type": "file",
@@ -220,7 +220,7 @@ With the `useTranslator` hook, you can access:
 }
 ```
 
-```tsx ui=CodeTabs
+```tsx ui=code-tabs
 ---
 title: src/App.tsx
 ---
@@ -249,7 +249,7 @@ export default App;
 
 ## Next Steps
 
-```tsx ui=Card
+```tsx ui=card
 ---
 title: Messages Loading
 href: /frameworks/vite-react/messages-loading
