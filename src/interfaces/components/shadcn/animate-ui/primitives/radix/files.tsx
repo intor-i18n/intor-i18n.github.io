@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion, type HTMLMotionProps } from "motion/react";
 import * as React from "react";
+import { getStrictContext } from "@/applications/shadcn/lib/get-strict-context";
 import { useControlledState } from "@/hooks/use-controlled-state";
 import {
   Highlight,
@@ -21,7 +22,6 @@ import {
   type AccordionTriggerProps,
   type AccordionContentProps,
 } from "@/interfaces/components/shadcn/animate-ui/primitives/radix/accordion";
-import { getStrictContext } from "@/lib/get-strict-context";
 
 type FilesContextType = {
   open: string[];

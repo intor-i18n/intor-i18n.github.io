@@ -22,12 +22,12 @@ export default async function MessagesLoadingPage({
         breadcrumbs={[
           { title: PAGES.frameworks.title, path: PAGES.frameworks.path },
           {
-            title: PAGES.frameworks.viteReact.title,
-            path: PAGES.frameworks.viteReact.path,
+            title: PAGES.frameworks.nextJs.title,
+            path: PAGES.frameworks.nextJs.path,
           },
-          { title: PAGES.frameworks.viteReact.messagesLoading.title },
+          { title: PAGES.frameworks.nextJs.messagesLoading.title },
         ]}
-        content={t(PAGES.frameworks.viteReact.messagesLoading.content)}
+        content={t(PAGES.frameworks.nextJs.messagesLoading.content)}
       />
     </>
   );

@@ -41,6 +41,12 @@ const data: { navMain: NavItem[] } = {
         {
           title: PAGES.frameworks.nextJs.title,
           path: PAGES.frameworks.nextJs.path,
+          items: [
+            {
+              title: PAGES.frameworks.nextJs.messagesLoading.title,
+              path: PAGES.frameworks.nextJs.messagesLoading.path,
+            },
+          ],
         },
         {
           title: PAGES.frameworks.viteReact.title,

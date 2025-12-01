@@ -3,7 +3,10 @@
 
   "frameworks": {
     "display": "Frameworks",
-    "next-js": { "display": "Next.js" },
+    "next-js": {
+      "display": "Next.js",
+      "messages-loading": { "display": "Messages Loading" }
+    },
     "vite-react": {
       "display": "Vite React",
       "messages-loading": { "display": "Messages Loading" }

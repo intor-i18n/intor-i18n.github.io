@@ -3,8 +3,8 @@
 import { motion, AnimatePresence, type HTMLMotionProps } from "motion/react";
 import { Accordion as AccordionPrimitive } from "radix-ui";
 import * as React from "react";
+import { getStrictContext } from "@/applications/shadcn/lib/get-strict-context";
 import { useControlledState } from "@/hooks/use-controlled-state";
-import { getStrictContext } from "@/lib/get-strict-context";
 
 type AccordionContextType = {
   value: string | string[] | undefined;

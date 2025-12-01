@@ -11,7 +11,7 @@
 若要開始 Next.js 專案，請先確認環境已準備完成。  
 若尚未建立專案，可參考官方指引：[Next.js 官方文件](https://nextjs.org/docs/app/getting-started/installation)
 
-- 此範例專案所採用的設定：`App Router`、`Tailwind CSS` 以及 `src/ 資料夾`。
+- 此範例專案所採用的設定：`App Router` 以及 `src/ 資料夾`。
 
 安裝 Intor：
 
@@ -248,14 +248,14 @@ export default function Home() {
   const { t } = useTranslator();
 
   return (
-    <div className="h-96 flex items-center justify-center flex-col">
+    <>
       <h1>{t("greeting")}</h1>
 
-      <div className="p-4 m-4 flex gap-2">
-        <Link locale={"en-US"}>en-US</Link>
-        <Link locale={"zh-TW"}>zh-TW</Link>
+      <div style={{ display: "flex", gap: "12px" }}>
+        <Link locale={"en-US"}>English</Link>
+        <Link locale={"zh-TW"}>繁體中文</Link>
       </div>
-    </div>
+    </>
   );
 }
 ```
@@ -358,7 +358,7 @@ export const config = {
 接著調整 `intorConfig`，增加 `routing.prefix` 設定，用來控制 URL 前綴的自動導向策略：
 
 - `all`：所有語系都加上前綴
-- `none`：不使用前綴
+- `none`：不使用前綴 (預設值)
 - `except-default`：僅非預設語系加前綴
 
 ```json ui=files
@@ -380,7 +380,7 @@ export const intorConfig = defineIntorConfig({
   defaultLocale: "en-US",
   supportedLocales: ["en-US", "zh-TW"],
   loader: { type: "local" },
-  routing: { prefix: "all" }, // 增加這行，預設值為 `none`
+  routing: { prefix: "all" }, // 增加這行
 });
 ```
 
@@ -394,13 +394,13 @@ export const intorConfig = defineIntorConfig({
 ```tsx ui=card
 ---
 title: 語言檔載入
-href: /frameworks/vite-react/messages-loading
+href: /frameworks/next-js/messages-loading
 ---
 我們會示範三種常見方式：靜態 Import、動態 Import，以及 遠端 Fetch，讓你依需求選擇最適合的策略。
 
 ---
 title: 型別生成與 IntelliSense
-href: /frameworks/vite-react/messages-loading
+href: /frameworks/next-js/messages-loading
 ---
 透過 @intor/cli 自動生成型別，讓您的開發過程具備完整的 IntelliSense 體驗與安全的型別支援。
 ```

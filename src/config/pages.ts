@@ -17,6 +17,11 @@ export const PAGES = {
       path: "/frameworks/next-js",
       title: "pages.frameworks.next-js.display",
       content: "articles.frameworks.next-js.content",
+      messagesLoading: {
+        path: "/frameworks/next-js/messages-loading",
+        title: "pages.frameworks.next-js.messages-loading.display",
+        content: "articles.frameworks.next-js.messages-loading.content",
+      },
     },
 
     // Vite react
@@ -24,7 +29,6 @@ export const PAGES = {
       path: "/frameworks/vite-react",
       title: "pages.frameworks.vite-react.display",
       content: "articles.frameworks.vite-react.content",
-
       messagesLoading: {
         path: "/frameworks/vite-react/messages-loading",
         title: "pages.frameworks.vite-react.messages-loading.display",

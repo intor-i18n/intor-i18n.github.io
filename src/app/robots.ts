@@ -8,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://tools.yiming-liao.com/sitemap.xml",
+    sitemap: "https://intor-i18n.github.io/sitemap.xml",
   };
 }

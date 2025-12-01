@@ -3,7 +3,10 @@
 
   "frameworks": {
     "display": "框架指南",
-    "next-js": { "display": "Next.js" },
+    "next-js": {
+      "display": "Next.js",
+      "messages-loading": { "display": "語言檔載入" }
+    },
     "vite-react": {
       "display": "Vite React",
       "messages-loading": { "display": "語言檔載入" }

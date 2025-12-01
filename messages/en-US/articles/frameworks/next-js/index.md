@@ -11,7 +11,7 @@ Quickly add Intor to your Next.js project to implement multi-language support, f
 Before starting a Next.js project, make sure your environment is ready.  
 If you haven’t created a project yet, refer to the official guide: [Next.js Documentation](https://nextjs.org/docs/app/getting-started/installation)
 
-- This example project uses: `App Router`, `Tailwind CSS`, and `src/ directory`.
+- This example project uses: `App Router` and `src/ directory`.
 
 Install Intor:
 
@@ -250,14 +250,14 @@ export default function Home() {
   const { t } = useTranslator();
 
   return (
-    <div className="h-96 flex items-center justify-center flex-col">
+    <>
       <h1>{t("greeting")}</h1>
 
-      <div className="p-4 m-4 flex gap-2">
-        <Link locale={"en-US"}>en-US</Link>
-        <Link locale={"zh-TW"}>zh-TW</Link>
+      <div style={{ display: "flex", gap: "12px" }}>
+        <Link locale={"en-US"}>English</Link>
+        <Link locale={"zh-TW"}>繁體中文</Link>
       </div>
-    </div>
+    </>
   );
 }
 ```
@@ -360,7 +360,7 @@ export const config = {
 Update `intorConfig` to add `routing.prefix` to control automatic URL prefix behavior:
 
 - `all`: prefix all locales
-- `none`: no prefix
+- `none`: no prefix (default)
 - `except-default`: only non-default locales get a prefix
 
 ```json ui=files
@@ -382,7 +382,7 @@ export const intorConfig = defineIntorConfig({
   defaultLocale: "en-US",
   supportedLocales: ["en-US", "zh-TW"],
   loader: { type: "local" },
-  routing: { prefix: "all" }, // add this line, default is `none`
+  routing: { prefix: "all" }, // add this line
 });
 ```
 
@@ -396,13 +396,13 @@ Your app can now automatically handle multi-language routing and ensure correct 
 ```tsx ui=card
 ---
 title: Messages Loading
-href: /frameworks/vite-react/messages-loading
+href: /frameworks/next-js/messages-loading
 ---
 Use @intor/cli to automatically generate types and enjoy full IntelliSense support with strong type safety throughout your development workflow.
 
 ---
 title: Type Generation & IntelliSense
-href: /frameworks/vite-react/messages-loading
+href: /frameworks/next-js/messages-loading
 ---
 Use @intor/cli to automatically generate types and enjoy full IntelliSense support with strong type safety throughout your development workflow.
 ```
