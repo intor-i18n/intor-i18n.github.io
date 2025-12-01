@@ -70,6 +70,7 @@ bun add intor
       },
       "src": {
         "type": "folder",
+        "gitStatus": "modified",
         "children": {
           "App.tsx": { "type": "file", "gitStatus": "modified" },
           "main.tsx": { "type": "file", "gitStatus": "modified" },
@@ -81,7 +82,7 @@ bun add intor
 }
 ```
 
-### ♯1 語言檔（Messages）
+### ♯1 語言檔
 
 在專案中建立 `messages` 資料夾，並依語系建立子資料夾，每個語系提供一個 `index.json`：
 
@@ -130,9 +131,10 @@ title: messages/zh-TW/index.json
 
 > 提示：您完全可以使用更簡易的攤平架構： `mesages/en-US.json` / `mesages/zh-TW.json` ，取決於您的喜好。
 
-### ♯2 Intor 設定（Configuration）
+### ♯2 Intor 設定檔
 
-建立全域設定檔 `intorConfig`，靜態匯入 `messages`：
+建立一個 通用設定檔 `intorConfig`，用於定義 Intor 的核心行為。  
+在這個範例中，我們採用 **靜態匯入** 的方式來載入 `messages`。
 
 ```json ui=files
 {
@@ -205,7 +207,7 @@ createRoot(document.getElementById("root")!).render(
 ## 使用範例
 
 下面示範的是一個最精簡的 `<App />`，讓您能迅速掌握 Intor 的核心使用方式。  
-透過 `useTranslator` 這個 hook，我們可以取得 t 與 setLocale：
+透過 `useTranslator` 這個 hook，我們可以取得：
 
 - `t` (translate) 用來翻譯文字
 - `setLocale` 用來切換當前語系。

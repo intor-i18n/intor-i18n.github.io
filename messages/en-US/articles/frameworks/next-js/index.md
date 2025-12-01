@@ -1,19 +1,19 @@
 # Next.js
 
-立即在 Next.js 專案中使用 Intor 實現多語系功能，完整支援 SSR 與 SSG，提供靈活的本地或遠端翻譯載入方式，並內建路由導向整合。
+Quickly add Intor to your Next.js project to implement multi-language support, fully compatible with SSR and SSG. It provides flexible local or remote translation loaders and built-in routing integration.
 
-> 以下範例使用 TypeScript，亦可使用 JavaScript。
+> The following examples use TypeScript, but JavaScript is also supported.
 
 ---
 
-## 安裝
+## Installation
 
-若要開始 Next.js 專案，請先確認環境已準備完成。  
-若尚未建立專案，可參考官方指引：[Next.js 官方文件](https://nextjs.org/docs/app/getting-started/installation)
+Before starting a Next.js project, make sure your environment is ready.  
+If you haven’t created a project yet, refer to the official guide: [Next.js Documentation](https://nextjs.org/docs/app/getting-started/installation)
 
-- 此範例專案所採用的設定：`App Router`、`Tailwind CSS` 以及 `src/ 資料夾`。
+- This example project uses: `App Router`, `Tailwind CSS`, and `src/ directory`.
 
-安裝 Intor：
+Install Intor:
 
 ```bash ui=code-tabs
 ---
@@ -39,9 +39,9 @@ bun add intor
 
 ---
 
-## 專案結構
+## Project Structure
 
-以下提供最簡化的 **Intor** 配置範例，實際目錄與命名可依專案需求調整：
+Here’s a minimal **Intor** setup example. You can adjust folder names and structure according to your project needs:
 
 ```json ui=files
 {
@@ -89,9 +89,10 @@ bun add intor
 }
 ```
 
-### ♯1 語言檔
+### ♯1 Language Files
 
-在專案中建立 `messages` 資料夾，並依語系建立子資料夾，每個語系提供一個 `index.json`：
+Create a `messages` folder in your project, and create a subfolder for each locale.  
+Each locale contains an `index.json` file:
 
 ```json ui=files
 {
@@ -136,10 +137,10 @@ title: messages/zh-TW/index.json
 }
 ```
 
-### ♯2 Intor 設定檔
+### ♯2 Intor Configuration
 
-建立一個 通用設定檔 `intorConfig`，用於定義 Intor 的核心行為。  
-在這個範例中，我們採用基本的 **Loader** 模式：`local`，訊息會從本地靜態檔案載入。
+Create a shared configuration file `intorConfig` to define Intor’s core behavior.  
+In this example, we use the basic **Loader** mode: `local`, which loads messages from local static files.
 
 ```json ui=files
 {
@@ -163,15 +164,15 @@ export const intorConfig = defineIntorConfig({
 });
 ```
 
-> 設定物件可依個人喜好命名與存放位置，例如 src/i18n/config.ts。
+> You can adjust the file path or naming according to your preferences, e.g. src/i18n/config.ts.
 
-### ♯3 初始化 Context
+### ♯3 Initialize Context
 
-在 Next.js 應用中，需要用 `IntorProvider` 包裹整個 App，以提供翻譯的 Context。  
-在此範例中，我們透過 `intor()` 搭配 `getI18nContext` 初始化 i18n 資料：
+In a Next.js app, wrap your app with `IntorProvider` to provide the translation context.
+Here, we initialize i18n data with `intor()` and `getI18nContext`:
 
-- `intor`：Server 端初始化入口，負責載入訊息並快取結果
-- `getI18nContext`：Next.js 專用，解析當前 locale 與 pathname
+- `intor`: server-side entry point, responsible for loading messages and caching results.
+- `getI18nContext`: Next.js helper that parses the current locale and pathname.
 
 ```json ui=files
 {
@@ -209,22 +210,23 @@ export default async function RootLayout({
 }
 ```
 
-> 提示：您也可以依專案需求自行設計取得 I18nContext 的方式。
+> Tip: You can customize how to get the I18nContext based on your project needs.
 
-🎉 至此，設定完成，可以開始在應用中使用 Intor。
+🎉 At this point, Intor is ready, and you can start using it in your application.
 
 ---
 
-## 使用範例
+## Usage Example
 
-下面示範的是一個最精簡的 `page.tsx`，讓您能迅速掌握 **Intor** 的核心使用方式。  
-首先，我們使用 useTranslator Hook 取得翻譯函數 t：
+Here’s a minimal `page.tsx` to quickly get started with Intor.
 
-- `t` (translate) 用來翻譯文字
+First, we use the `useTranslator` hook to get the translation function t:
 
-接著，我們使用 Link 組件來切換語系：
+- `t` (translate): used to translate text
 
-- `Link`：包裝過的 next/link，當 loader 類型為 `local` 時，會觸發頁面重載 (full reload)
+Next, we use the Link component to switch locales:
+
+- `Link`: a wrapped next/link. When the loader type is `local`, switching triggers a full page reload.
 
 ```json ui=files
 {
@@ -262,17 +264,17 @@ export default function Home() {
 
 ---
 
-## 額外配置
+## Additional Configuration
 
-### ♯4 路由導向
+### ♯4 Routing
 
-在 Next.js 專案中，若想要 **自動處理多語系路由**，可以使用 Intor 提供的 `intorProxy`，並搭配 Next.js 的 Proxy 機制，自動將使用者導向對應的語系路由，無需手動調整 URL。
+In a Next.js project, to **automatically handle multi-language routing**, you can use Intor’s `intorProxy` together with Next.js proxy to redirect users to the corresponding locale route without manually modifying URLs.
 
-若想詳細了解 Next.js 的 Proxy 用法請詳見：[Next.js 官方文件](https://nextjs.org/docs/app/api-reference/file-conventions/proxy)
+For more on Next.js Proxy, see: [Next.js Documentation](https://nextjs.org/docs/app/api-reference/file-conventions/proxy)
 
-> 範例中使用 Next.js 最新版 API `proxy.ts`，若使用舊版，可改用 `middleware.ts`。
+> This example uses Next.js’s latest `proxy.ts` API. For older versions, use `middleware.ts`.
 
-調整後的結構：
+Updated structure:
 
 ```json ui=files
 {
@@ -306,9 +308,9 @@ export default function Home() {
 }
 ```
 
-首先新增動態路由資料夾 `[locale]`，以及對應的 `page.tsx`
+Create a dynamic `[locale]` folder with a `page.tsx` file.
 
-新增的 `page.tsx` 內容跟前面使用範例一模一樣：[使用範例 src/app/page.tsx](#使用範例)，可以直接複製整個檔案：
+The content of this `page.tsx` is the same as the usage example above: [Usage Example src/app/page.tsx](#usage-example)
 
 ```json ui=files
 {
@@ -325,7 +327,7 @@ export default function Home() {
 }
 ```
 
-新增 `proxy.ts`，使用 `intorProxy` 自動導向對應語系：
+Add `proxy.ts` to automatically redirect using `intorProxy`:
 
 ```json ui=files
 {
@@ -355,11 +357,11 @@ export const config = {
 };
 ```
 
-接著調整 `intorConfig`，增加 `routing.prefix` 設定，用來控制 URL 前綴的自動導向策略：
+Update `intorConfig` to add `routing.prefix` to control automatic URL prefix behavior:
 
-- `all`：所有語系都加上前綴
-- `none`：不使用前綴
-- `except-default`：僅非預設語系加前綴
+- `all`: prefix all locales
+- `none`: no prefix
+- `except-default`: only non-default locales get a prefix
 
 ```json ui=files
 {
@@ -380,27 +382,27 @@ export const intorConfig = defineIntorConfig({
   defaultLocale: "en-US",
   supportedLocales: ["en-US", "zh-TW"],
   loader: { type: "local" },
-  routing: { prefix: "all" }, // 增加這行，預設值為 `none`
+  routing: { prefix: "all" }, // add this line, default is `none`
 });
 ```
 
-設定完成後，訪問 http://localhost:3000/ 會自動導向到 `http://localhost:3000/{locale}`。  
-這樣一來，App 就能自動處理多語系路由，並確保使用者切換語系時導向正確。 💐
+After setup, visiting http://localhost:3000/ will redirect to `http://localhost:3000/{locale}`.  
+Your app can now automatically handle multi-language routing and ensure correct navigation when switching locales. 💐
 
 ---
 
-## 下一步行動
+## Next Steps
 
 ```tsx ui=card
 ---
-title: 語言檔載入
+title: Messages Loading
 href: /frameworks/vite-react/messages-loading
 ---
-我們會示範三種常見方式：靜態 Import、動態 Import，以及 遠端 Fetch，讓你依需求選擇最適合的策略。
+Use @intor/cli to automatically generate types and enjoy full IntelliSense support with strong type safety throughout your development workflow.
 
 ---
-title: 型別生成與 IntelliSense
+title: Type Generation & IntelliSense
 href: /frameworks/vite-react/messages-loading
 ---
-透過 @intor/cli 自動生成型別，讓您的開發過程具備完整的 IntelliSense 體驗與安全的型別支援。
+Use @intor/cli to automatically generate types and enjoy full IntelliSense support with strong type safety throughout your development workflow.
 ```

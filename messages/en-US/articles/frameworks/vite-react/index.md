@@ -3,7 +3,7 @@
 This page shows the minimal setup for integrating Intor with Vite + React, including preparing message files, configuring Intor, and initializing the Context.  
 These steps form the core usage pattern in typical front-end projects.
 
-> The following examples use TypeScript, but JavaScript can also be used.
+> The following examples use TypeScript, but JavaScript is also supported.
 
 ---
 
@@ -70,6 +70,7 @@ Here’s a minimal **Intor** setup example. You can adjust folder names and stru
       },
       "src": {
         "type": "folder",
+        "gitStatus": "modified",
         "children": {
           "App.tsx": { "type": "file", "gitStatus": "modified" },
           "main.tsx": { "type": "file", "gitStatus": "modified" },
@@ -81,7 +82,7 @@ Here’s a minimal **Intor** setup example. You can adjust folder names and stru
 }
 ```
 
-### ♯1 Language Files (Messages)
+### ♯1 Language Files
 
 Create a `messages` folder in your project, and create a subfolder for each locale.  
 Each locale contains an `index.json` file:
@@ -133,7 +134,8 @@ title: messages/zh-TW/index.json
 
 ### ♯2 Intor Configuration
 
-Create a global configuration file `intorConfig` and statically import `messages`:
+Create a shared configuration file `intorConfig` to define Intor’s core behavior.  
+In this example, we use **static imports** to load `messages`.
 
 ```json ui=files
 {
@@ -208,7 +210,7 @@ createRoot(document.getElementById("root")!).render(
 Here’s a minimal` <App />` example to quickly demonstrate the core usage of **Intor**.  
 With the `useTranslator` hook, you can access:
 
-- `t` (translate) to get translated text
+- `t` (translate) used to translate text
 - `setLocale` to switch the current locale
 
 ```json ui=files
