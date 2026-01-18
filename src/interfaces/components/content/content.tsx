@@ -1,9 +1,8 @@
 "use client";
 
-import { Link, useTranslator } from "intor/next";
+import { Link } from "intor/next";
 import { Fragment, type ReactNode } from "react";
 import { useMarkdownHeadings } from "@/applications/content/use-markdown-headings";
-import { useIsMobile } from "@/applications/shadcn/hooks/use-mobile";
 import { Article } from "@/interfaces/components/content/article";
 import { Toc } from "@/interfaces/components/content/toc";
 import {
@@ -27,16 +26,13 @@ export function Content({
   children?: ReactNode;
   breadcrumbs: Array<{ title: string; path?: string }>;
 }) {
-  const { t } = useTranslator();
   const { headings } = useMarkdownHeadings(content);
 
-  const isMobile = useIsMobile();
-
   return (
-    <div className="flex">
+    <div className="flex w-full">
       <div
-        className="flex flex-col"
-        style={{ width: isMobile ? "100%" : `calc(100% - ${TOC_WIDTH}px)` }}
+        style={{ "--toc-width": `${TOC_WIDTH}px` } as React.CSSProperties}
+        className="flex w-full flex-col lg:w-[calc(100%-var(--toc-width))]"
       >
         {/* breadcrumbs */}
         <Breadcrumb
@@ -51,10 +47,10 @@ export function Content({
                   <BreadcrumbItem>
                     {!isLast ? (
                       <BreadcrumbLink asChild>
-                        <Link href={path}>{t(title)}</Link>
+                        <Link href={path}>{title}</Link>
                       </BreadcrumbLink>
                     ) : (
-                      <BreadcrumbPage>{t(title)}</BreadcrumbPage>
+                      <BreadcrumbPage>{title}</BreadcrumbPage>
                     )}
                   </BreadcrumbItem>
 
@@ -75,7 +71,7 @@ export function Content({
       </div>
 
       {/* toc */}
-      <div className="pt-14 max-md:hidden" style={{ width: TOC_WIDTH }}>
+      <div className="pt-14 max-lg:hidden" style={{ width: TOC_WIDTH }}>
         <Toc headings={headings} />
       </div>
     </div>

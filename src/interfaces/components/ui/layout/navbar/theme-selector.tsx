@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslator } from "intor/next";
+import { useTranslator } from "intor/react";
 import { Moon, Sun, TvMinimal } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/interfaces/components/shadcn/button";

@@ -1,29 +1,26 @@
+import type { PageProps } from "@/types/page-props";
 import { getTranslator } from "intor/server";
 import { PAGES } from "@/config/pages";
 import { intorConfig } from "@/infrastructure/i18n/intor-config";
-import { mdReader } from "@/infrastructure/i18n/md-reader";
+import { readers } from "@/infrastructure/i18n/readers";
 import { Content } from "@/interfaces/components/content/content";
 
-export default async function ViteReactPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function ViteReactPage({ params }: PageProps) {
   const { locale } = await params;
-  const { t } = await getTranslator({
-    config: intorConfig,
+  const { t } = await getTranslator(intorConfig, {
     locale,
-    extraOptions: { exts: [".json", ".md"], messagesReader: mdReader },
+    readers,
+    preKey: "content.frameworks",
   });
 
   return (
     <>
       <Content
         breadcrumbs={[
-          { title: PAGES.frameworks.title, path: PAGES.frameworks.path },
-          { title: PAGES.frameworks.viteReact.title },
+          { title: t("title.text"), path: PAGES.frameworks.path },
+          { title: t("vite-react.title.text") },
         ]}
-        content={t(PAGES.frameworks.viteReact.content)}
+        content={t("vite-react.article.content")}
       />
     </>
   );

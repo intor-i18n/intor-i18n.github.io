@@ -1,0 +1,206 @@
+{
+  "version": 1,
+  "generatedAt": "2026-01-18T14:46:30.011Z",
+  "configs": [
+    {
+      "id": "i18n",
+      "locales": [
+        "en-US",
+        "zh-TW"
+      ],
+      "schemas": {
+        "messagesSchema": {
+          "kind": "object",
+          "properties": {
+            "content": {
+              "kind": "object",
+              "properties": {
+                "frameworks": {
+                  "kind": "object",
+                  "properties": {
+                    "next-js": {
+                      "kind": "object",
+                      "properties": {
+                        "messages-loading": {
+                          "kind": "object",
+                          "properties": {
+                            "content": {
+                              "kind": "primitive",
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "article": {
+                          "kind": "object",
+                          "properties": {
+                            "content": {
+                              "kind": "primitive",
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "title": {
+                          "kind": "object",
+                          "properties": {
+                            "text": {
+                              "kind": "primitive",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "vite-react": {
+                      "kind": "object",
+                      "properties": {
+                        "dynamic-loading": {
+                          "kind": "object",
+                          "properties": {
+                            "article": {
+                              "kind": "object",
+                              "properties": {
+                                "content": {
+                                  "kind": "primitive",
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "title": {
+                              "kind": "object",
+                              "properties": {
+                                "text": {
+                                  "kind": "primitive",
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "article": {
+                          "kind": "object",
+                          "properties": {
+                            "content": {
+                              "kind": "primitive",
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "title": {
+                          "kind": "object",
+                          "properties": {
+                            "text": {
+                              "kind": "primitive",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "title": {
+                      "kind": "object",
+                      "properties": {
+                        "text": {
+                          "kind": "primitive",
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "article": {
+                      "kind": "object",
+                      "properties": {
+                        "content": {
+                          "kind": "primitive",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "icu": {
+                  "kind": "object",
+                  "properties": {
+                    "article": {
+                      "kind": "object",
+                      "properties": {
+                        "content": {
+                          "kind": "primitive",
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "title": {
+                      "kind": "object",
+                      "properties": {
+                        "text": {
+                          "kind": "primitive",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "introduction": {
+                  "kind": "object",
+                  "properties": {
+                    "title": {
+                      "kind": "object",
+                      "properties": {
+                        "text": {
+                          "kind": "primitive",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "ui": {
+              "kind": "object",
+              "properties": {
+                "theme": {
+                  "kind": "object",
+                  "properties": {
+                    "light": {
+                      "kind": "object",
+                      "properties": {
+                        "display": {
+                          "kind": "primitive",
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "dark": {
+                      "kind": "object",
+                      "properties": {
+                        "display": {
+                          "kind": "primitive",
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "system": {
+                      "kind": "object",
+                      "properties": {
+                        "display": {
+                          "kind": "primitive",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "replacementsSchema": {
+          "kind": "none"
+        },
+        "richSchema": {
+          "kind": "none"
+        }
+      }
+    }
+  ]
+}

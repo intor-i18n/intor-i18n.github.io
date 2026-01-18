@@ -1,11 +1,11 @@
 import "@/interfaces/styles/globals.css";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { mdReader } from "@intor/reader-md";
+import { IntorProvider } from "intor/react";
 import { intor } from "intor/server";
 import { intorConfig } from "@/infrastructure/i18n/intor-config";
 import { LOCALES_ARRAY } from "@/infrastructure/i18n/locale";
-import { mdReader } from "@/infrastructure/i18n/md-reader";
-import { I18nProvider } from "@/infrastructure/i18n/providers/i18n-provider";
 import { ThemeProvider } from "@/interfaces/components/shadcn/theme/theme-provider";
 
 export async function generateStaticParams() {
@@ -43,15 +43,11 @@ type Props = Readonly<{
 
 export default async function RootLayout({ params, children }: Props) {
   const { locale } = await params;
-  const value = await intor(
-    intorConfig,
-    { locale },
-    { exts: [".json", ".md"], messagesReader: mdReader },
-  );
+  const value = await intor(intorConfig, locale, { readers: { md: mdReader } });
 
   return (
     <html
-      lang={value.initialLocale}
+      lang={value.locale}
       suppressHydrationWarning
       data-scroll-behavior="smooth"
     >
@@ -60,7 +56,7 @@ export default async function RootLayout({ params, children }: Props) {
         className="flex justify-center antialiased"
         suppressHydrationWarning
       >
-        <I18nProvider value={value}>
+        <IntorProvider value={value}>
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -69,7 +65,7 @@ export default async function RootLayout({ params, children }: Props) {
           >
             {children}
           </ThemeProvider>
-        </I18nProvider>
+        </IntorProvider>
       </body>
     </html>
   );

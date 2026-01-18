@@ -8,11 +8,12 @@ export default async function HomePage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const { t } = await getTranslator({ config: intorConfig, locale });
+  const { t } = await getTranslator(intorConfig, { locale });
+  console.log(t("content.frameworks.title.text"));
 
   return (
     <div className="flex flex-col">
-      <p>{t("123")}</p>
+      <p>{`t("articles.frameworks.content")`}</p>
 
       <PageCsr />
     </div>

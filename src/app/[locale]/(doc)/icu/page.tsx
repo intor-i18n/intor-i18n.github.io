@@ -1,26 +1,23 @@
-import { mdReader } from "@intor/reader-md";
+import type { PageProps } from "@/types/page-props";
 import { getTranslator } from "intor/server";
 import { intorConfig } from "@/infrastructure/i18n/intor-config";
+import { readers } from "@/infrastructure/i18n/readers";
 import { Content } from "@/interfaces/components/content/content";
 
-export default async function IntroductionPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function IcuPage({ params }: PageProps) {
   const { locale } = await params;
   const { t } = await getTranslator(intorConfig, {
     locale,
-    readers: { md: mdReader },
-    preKey: "content.introduction",
+    readers,
+    preKey: "content.icu",
   });
 
   return (
     <>
       <Content
         breadcrumbs={[{ title: t("title.text") }]}
-        // content={t("article.content")}
-      ></Content>
+        content={t("article.content")}
+      />
     </>
   );
 }

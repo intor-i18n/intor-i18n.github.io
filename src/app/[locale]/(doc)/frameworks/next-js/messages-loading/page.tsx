@@ -1,7 +1,7 @@
+import { mdReader } from "@intor/reader-md";
 import { getTranslator } from "intor/server";
 import { PAGES } from "@/config/pages";
 import { intorConfig } from "@/infrastructure/i18n/intor-config";
-import { mdReader } from "@/infrastructure/i18n/md-reader";
 import { Content } from "@/interfaces/components/content/content";
 
 export default async function MessagesLoadingPage({
@@ -10,24 +10,23 @@ export default async function MessagesLoadingPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const { t } = await getTranslator({
-    config: intorConfig,
+  const { t } = await getTranslator(intorConfig, {
     locale,
-    extraOptions: { exts: [".json", ".md"], messagesReader: mdReader },
+    readers: { md: mdReader },
   });
 
   return (
     <>
       <Content
         breadcrumbs={[
-          { title: PAGES.frameworks.title, path: PAGES.frameworks.path },
+          { title: " PAGES.frameworks.title", path: PAGES.frameworks.path },
           {
-            title: PAGES.frameworks.nextJs.title,
+            title: "PAGES.frameworks.nextJs.title",
             path: PAGES.frameworks.nextJs.path,
           },
-          { title: PAGES.frameworks.nextJs.messagesLoading.title },
+          { title: "PAGES.frameworks.nextJs.messagesLoading.title" },
         ]}
-        content={t(PAGES.frameworks.nextJs.messagesLoading.content)}
+        content={"content"}
       />
     </>
   );
