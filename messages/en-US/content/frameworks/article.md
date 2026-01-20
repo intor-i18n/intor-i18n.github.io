@@ -1,4 +1,4 @@
-# Quick Start
+# Frameworks
 
 Intor is a framework-agnostic i18n core for modern JavaScript/TypeScript projects.  
 It centralizes localization and translation, works with multiple frameworks, and keeps your setup minimal and scalable.

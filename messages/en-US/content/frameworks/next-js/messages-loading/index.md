@@ -1,6 +1,6 @@
 # Messages Loading
 
-This page demonstrates how to integrate language messages into Intor in a Vite + React project.  
+This page demonstrates how to integrate language messages into Intor in a React project.  
 We’ll showcase three common loading strategies: **Static Import**, **Dynamic Import**, and **Remote Fetch**, so you can choose the approach that best fits your needs.
 
 ---
@@ -12,7 +12,7 @@ We’ll showcase three common loading strategies: **Static Import**, **Dynamic I
 > Static Import is the simplest and most straightforward approach.
 
 With static import, you simply include the language messages directly in your project, and Intor will immediately use them.  
-See [Vite React ♯2 Intor Configuration](../vite-react#2-intor-configuration) for details.
+See [React ♯2 Intor Configuration](../react#2-intor-configuration) for details.
 
 ```ts ui=code-tabs
 ---

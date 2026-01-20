@@ -15,7 +15,7 @@ export function useMarkdownHeadings(content: string) {
     );
 
     // 2. Now safely match headings
-    const regex = /^(#{1,3})\s+(.*)$/gm; // h1 ~ h3
+    const regex = /^(#{1,4})\s+(.*)$/gm; // h1 ~ h3
     const matches: HeadingItem[] = [];
     let match;
 

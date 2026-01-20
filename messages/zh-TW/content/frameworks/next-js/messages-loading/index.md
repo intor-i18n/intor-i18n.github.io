@@ -12,7 +12,7 @@
 > 靜態 Import 是最簡單直接的方式。
 
 使用靜態 Import 時，你只需要在專案中直接引入各語系的 `messages`，Intor 會立刻取得並使用它們。  
-詳見 [Vite React ♯2 Intor 設定](../vite-react#2-intor-設定configuration)。
+詳見 [Vite React ♯2 Intor 設定](../react#2-intor-設定configuration)。
 
 ```ts ui=code-tabs
 ---

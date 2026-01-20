@@ -13,6 +13,18 @@ import {
   NAVBAR_HEIGHT,
 } from "@/interfaces/styles/constants";
 
+const LINE_LEFT = {
+  "2": 0,
+  "3": 12,
+  "4": 24,
+};
+
+const LINK_PADDING_LEFT = {
+  2: 4,
+  3: 16,
+  4: 28,
+};
+
 export function Toc({ headings }: { headings: HeadingItem[] }) {
   const isMobile = useIsMobile();
   const [activeId, setActiveId] = useState<string | null>(null);
@@ -23,7 +35,7 @@ export function Toc({ headings }: { headings: HeadingItem[] }) {
       const handleScroll = () => {
         const scrollMiddle = globalThis.innerHeight * 0.08;
         const headingElements = [
-          ...document.querySelectorAll("h1, h2, h3"),
+          ...document.querySelectorAll("h1, h2, h3, h4"),
         ] as HTMLElement[];
         let currentId: string | null = null;
 
@@ -79,7 +91,9 @@ export function Toc({ headings }: { headings: HeadingItem[] }) {
     queueMicrotask(() =>
       setLineStyle({
         top: !li ? 0 : li.offsetTop + 6,
-        left: !li ? 0 : li.dataset.level === "3" ? 12 : 0,
+        left: !li
+          ? 0
+          : (LINE_LEFT[li.dataset.level as keyof typeof LINE_LEFT] ?? 0),
         height: !li ? 0 : 24,
       }),
     );
@@ -90,7 +104,7 @@ export function Toc({ headings }: { headings: HeadingItem[] }) {
       className="sticky h-fit overflow-auto p-2"
       style={{ top: NAVBAR_HEIGHT + BREADCRUMBS_HEIGHT }}
     >
-      <p className="text-primary/60 font-semibold">On this page</p>
+      <p className="text-primary/60 py-2 font-semibold">On this page</p>
 
       <ul className="relative px-2 text-sm" ref={containerRef}>
         {/* Line */}
@@ -108,7 +122,10 @@ export function Toc({ headings }: { headings: HeadingItem[] }) {
               key={id}
               data-id={id}
               data-level={level}
-              style={{ paddingLeft: level === 2 ? 4 : 16 }}
+              style={{
+                paddingLeft:
+                  LINK_PADDING_LEFT[level as keyof typeof LINK_PADDING_LEFT],
+              }}
               className="w-full"
             >
               <Link

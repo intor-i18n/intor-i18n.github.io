@@ -33,10 +33,15 @@ export function Code({
   if (meta.ui === "code-tabs") {
     const codeItems = toCodeItems(content);
     const obj: Record<string, string> = {};
-    for (const item of codeItems) {
-      obj[item.title] = item.content;
-    }
-    return <CodeTabs lang={lang} codes={obj} className="mt-6" />;
+    for (const item of codeItems) obj[item.title] = item.content;
+    return (
+      <CodeTabs
+        lang={lang}
+        codes={obj}
+        hideHeader={meta.hideHeader === "true"}
+        className="mt-6"
+      />
+    );
   }
 
   // [ui] card

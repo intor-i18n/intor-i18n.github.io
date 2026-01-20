@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-01-18T14:46:30.011Z",
+  "generatedAt": "2026-01-20T07:40:25.651Z",
   "configs": [
     {
       "id": "i18n",
@@ -15,6 +15,190 @@
             "content": {
               "kind": "object",
               "properties": {
+                "config": {
+                  "kind": "object",
+                  "properties": {
+                    "locale": {
+                      "kind": "object",
+                      "properties": {
+                        "article": {
+                          "kind": "object",
+                          "properties": {
+                            "content": {
+                              "kind": "primitive",
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "title": {
+                          "kind": "object",
+                          "properties": {
+                            "text": {
+                              "kind": "primitive",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "messages": {
+                      "kind": "object",
+                      "properties": {
+                        "article": {
+                          "kind": "object",
+                          "properties": {
+                            "content": {
+                              "kind": "primitive",
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "title": {
+                          "kind": "object",
+                          "properties": {
+                            "text": {
+                              "kind": "primitive",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "messages-loading": {
+                      "kind": "object",
+                      "properties": {
+                        "title": {
+                          "kind": "object",
+                          "properties": {
+                            "text": {
+                              "kind": "primitive",
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "article": {
+                          "kind": "object",
+                          "properties": {
+                            "content": {
+                              "kind": "primitive",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "observability": {
+                      "kind": "object",
+                      "properties": {
+                        "article": {
+                          "kind": "object",
+                          "properties": {
+                            "content": {
+                              "kind": "primitive",
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "title": {
+                          "kind": "object",
+                          "properties": {
+                            "text": {
+                              "kind": "primitive",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "persistence": {
+                      "kind": "object",
+                      "properties": {
+                        "article": {
+                          "kind": "object",
+                          "properties": {
+                            "content": {
+                              "kind": "primitive",
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "title": {
+                          "kind": "object",
+                          "properties": {
+                            "text": {
+                              "kind": "primitive",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "routing": {
+                      "kind": "object",
+                      "properties": {
+                        "article": {
+                          "kind": "object",
+                          "properties": {
+                            "content": {
+                              "kind": "primitive",
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "title": {
+                          "kind": "object",
+                          "properties": {
+                            "text": {
+                              "kind": "primitive",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "translator": {
+                      "kind": "object",
+                      "properties": {
+                        "article": {
+                          "kind": "object",
+                          "properties": {
+                            "content": {
+                              "kind": "primitive",
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "title": {
+                          "kind": "object",
+                          "properties": {
+                            "text": {
+                              "kind": "primitive",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "article": {
+                      "kind": "object",
+                      "properties": {
+                        "content": {
+                          "kind": "primitive",
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "title": {
+                      "kind": "object",
+                      "properties": {
+                        "text": {
+                          "kind": "primitive",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
                 "frameworks": {
                   "kind": "object",
                   "properties": {
@@ -50,10 +234,33 @@
                         }
                       }
                     },
-                    "vite-react": {
+                    "react": {
                       "kind": "object",
                       "properties": {
                         "dynamic-loading": {
+                          "kind": "object",
+                          "properties": {
+                            "article": {
+                              "kind": "object",
+                              "properties": {
+                                "content": {
+                                  "kind": "primitive",
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "title": {
+                              "kind": "object",
+                              "properties": {
+                                "text": {
+                                  "kind": "primitive",
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "rich-translations": {
                           "kind": "object",
                           "properties": {
                             "article": {
@@ -96,6 +303,15 @@
                         }
                       }
                     },
+                    "article": {
+                      "kind": "object",
+                      "properties": {
+                        "content": {
+                          "kind": "primitive",
+                          "type": "string"
+                        }
+                      }
+                    },
                     "title": {
                       "kind": "object",
                       "properties": {
@@ -104,11 +320,25 @@
                           "type": "string"
                         }
                       }
-                    },
+                    }
+                  }
+                },
+                "handlers-and-plugins": {
+                  "kind": "object",
+                  "properties": {
                     "article": {
                       "kind": "object",
                       "properties": {
                         "content": {
+                          "kind": "primitive",
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "title": {
+                      "kind": "object",
+                      "properties": {
+                        "text": {
                           "kind": "primitive",
                           "type": "string"
                         }
@@ -142,6 +372,98 @@
                 "introduction": {
                   "kind": "object",
                   "properties": {
+                    "design-philosophy": {
+                      "kind": "object",
+                      "properties": {
+                        "article": {
+                          "kind": "object",
+                          "properties": {
+                            "content": {
+                              "kind": "primitive",
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "title": {
+                          "kind": "object",
+                          "properties": {
+                            "text": {
+                              "kind": "primitive",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "title": {
+                      "kind": "object",
+                      "properties": {
+                        "text": {
+                          "kind": "primitive",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "messages": {
+                  "kind": "object",
+                  "properties": {
+                    "article": {
+                      "kind": "object",
+                      "properties": {
+                        "content": {
+                          "kind": "primitive",
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "title": {
+                      "kind": "object",
+                      "properties": {
+                        "text": {
+                          "kind": "primitive",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "messages-loader": {
+                  "kind": "object",
+                  "properties": {
+                    "article": {
+                      "kind": "object",
+                      "properties": {
+                        "content": {
+                          "kind": "primitive",
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "title": {
+                      "kind": "object",
+                      "properties": {
+                        "text": {
+                          "kind": "primitive",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "translator": {
+                  "kind": "object",
+                  "properties": {
+                    "article": {
+                      "kind": "object",
+                      "properties": {
+                        "content": {
+                          "kind": "primitive",
+                          "type": "string"
+                        }
+                      }
+                    },
                     "title": {
                       "kind": "object",
                       "properties": {

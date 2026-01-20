@@ -9,7 +9,7 @@ export function parseCode(children: ReactNode, node: ExtraProps["node"]) {
   if (!node || !meta || !className || !Array.isArray(className)) {
     return {
       content,
-      meta: { ui: undefined },
+      meta: { ui: undefined, hideHeader: undefined },
       lang: undefined,
     };
   }

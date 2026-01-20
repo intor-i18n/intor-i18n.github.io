@@ -2,8 +2,8 @@
 
 import { Link } from "intor/next";
 import { PAGES } from "@/config/pages";
-import Nextjs from "@/interfaces/components/icons/nextjs";
-import Vite from "@/interfaces/components/icons/vite";
+import { Nextjs } from "@/interfaces/components/icons/next-js";
+import { React } from "@/interfaces/components/icons/react";
 import { SpotlightCard } from "@/interfaces/components/shadcn/spotlight-card/spotlight-card";
 
 export function FrameworkCards() {
@@ -16,10 +16,10 @@ export function FrameworkCards() {
         </SpotlightCard>
       </Link>
 
-      <Link href={PAGES.frameworks.viteReact.path}>
+      <Link href={PAGES.frameworks.react.path}>
         <SpotlightCard className="items-center gap-3">
-          <Vite />
-          Vite React
+          <React />
+          React
         </SpotlightCard>
       </Link>
     </div>
